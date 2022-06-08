@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.login-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7f8c8d;
+}
+
+.login-main{
+    width: 350px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+[type='email']{
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: 0;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 3px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+[type='password']{
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: 0;
+    font-size: 16px;
+    padding-left: 3px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.login-main button{
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
