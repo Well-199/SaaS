@@ -3,16 +3,15 @@ import { Navigate } from 'react-router-dom'
 const AuthPrivate = ({children}) => {
 
     // Buscar no local storage e comparar hash com o banco
+    const isAuth = localStorage.getItem('token')
 
-    const isAuth = false
+    console.log('Token: ', isAuth)
 
-    if(isAuth){
-        return children
-    }
-    else{
+    if(isAuth==null){
         return <Navigate to="/"/>
     }
-
+    
+    return children
 }
 
 export default AuthPrivate

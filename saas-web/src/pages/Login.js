@@ -26,10 +26,11 @@ const Login = () => {
         const res = await req.json()
 
         if(res.data===true){
-            // pegar o token e adicionar no localstorage
-            // e verificar no auth
+            
+            localStorage.setItem('token', res.token)
             navigate('/Home')
             return
+
         }
         
         setError(res.data)
@@ -49,7 +50,7 @@ const Login = () => {
                 </div>
                 
                 <input type='email' value={email} 
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value.toLowerCase())}
                 />
 
                 <input type='password' value={password}

@@ -9,6 +9,13 @@ const User = {
         return rows[0]
     },
 
+    // inseri o token na sessao do usuario
+    pushToken: async (token, id) => {
+        const { rows } = await db.query(`
+            UPDATE users SET token=$1 WHERE (id=$2)`, [token, id])
+        return rows
+    }
+
 }
 
 module.exports = User
