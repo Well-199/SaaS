@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 const UserController = {
 
-    async findEmail (req, res) {
+    async login (req, res) {
 
         let email = req.body.email
         let pass = req.body.pass
@@ -37,6 +37,22 @@ const UserController = {
         await User.pushToken(token, user.id)
 
         res.json({data: true, token: token})
+    },
+
+    async userData (req, res) {
+
+        // aproveita o token da requisição
+        let token = req.headers.authorization
+
+        const user = await User.findByToken(token)
+
+        // se não foi encontrado um token no banco paro a requisiçao aqui
+        if(!user){
+            res.json({data: {}})
+            return
+        }
+
+        res.json({data: user})
     }
 
 }

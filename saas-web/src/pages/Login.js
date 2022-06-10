@@ -46,7 +46,7 @@ const Login = () => {
             <div className='login-main'>
                 
                 <div className='logo'>
-                    <img src={logoInput}/>
+                    <img src={logoInput} alt="logo"/>
                 </div>
                 
                 <input type='email' value={email} 

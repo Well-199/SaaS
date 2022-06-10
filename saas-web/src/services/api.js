@@ -1,3 +1,18 @@
-const url = 'http://localhost:8000/api'
+const url = ''
 
 export default url
+
+/*
+
+    Local
+   
+
+    -----------------------------------------------------------
+
+    Testes
+    
+
+
+
+*/
+

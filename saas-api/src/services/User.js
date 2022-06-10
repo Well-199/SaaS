@@ -9,6 +9,13 @@ const User = {
         return rows[0]
     },
 
+    // Busca o usuario pelo token
+    findByToken: async (token) => {
+        const { rows } = await db.query(`
+            SELECT * FROM users WHERE(token=$1)`, [token])
+        return rows[0]
+    },
+
     // inseri o token na sessao do usuario
     pushToken: async (token, id) => {
         const { rows } = await db.query(`
