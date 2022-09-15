@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import logoInput from '../images/input-output.png'
 import url from '../services/api'
@@ -27,8 +27,8 @@ const Login = () => {
 
         if(res.data===true){
             
-            localStorage.setItem('token', res.token)
-            navigate('/Home')
+            localStorage.setItem('systemToken', res.token)
+            navigate('/Painel')
             return
 
         }
@@ -39,6 +39,10 @@ const Login = () => {
             setError('')
         }, 1500)
     }
+
+    useEffect(() => {
+        localStorage.removeItem('systemToken')
+    }, [])
 
     return(
         <div className='login-container'>

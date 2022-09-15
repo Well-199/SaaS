@@ -7,14 +7,17 @@ import Clientes from '../pages/Clientes'
 import Produtos from '../pages/Produtos'
 import Colaborador from '../pages/Colaborador'
 import Transportadora from '../pages/Transportadora'
-
+import PainelProducao from '../pages/Painel-producao'
 
 const Router = () => {
 
     return(
         <Routes>
+            {/* <Route path='/' element={<PainelProducao/>}/> */}
+
             <Route path='/' element={<Login/>}/>
             <Route path='/Home' element={<AuthPrivate><Home/></AuthPrivate>}/>
+            <Route path='/Painel' element={<AuthPrivate><PainelProducao/></AuthPrivate>}/>
             <Route path='/Cadastro/Clientes' element={<AuthPrivate><Clientes/></AuthPrivate>}/>
             <Route path='/Cadastro/Produtos' element={<AuthPrivate><Produtos/></AuthPrivate>}/>
             <Route path='/Cadastro/Colaborador' element={<AuthPrivate><Colaborador/></AuthPrivate>}/>

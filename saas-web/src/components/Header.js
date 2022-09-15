@@ -17,13 +17,13 @@ const Header = () => {
             method: 'GET',
             body: JSON.stringify(),
             headers: {
-                'authorization': localStorage.getItem('token')
+                'authorization': localStorage.getItem('systemToken')
             }
         })
         const res = await req.json()
 
-        setName(res.data.name)
-        setCompany(res.data.company)
+        setName(res.data.nome)
+        setCompany(res.data.empresa)
     
     }
 

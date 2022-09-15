@@ -15,8 +15,6 @@ const UserController = {
 
         const user = await User.findByEmail(email)
 
-        console.log(user)
-
         if(!user){
             res.json({data: 'Usuario não existe'})
             return

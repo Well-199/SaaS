@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Start Modal  */
+.modalContainer{
+    width: 500px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modalContainer input{
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.modalContainer select{
+    height: 40px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.modalButtons {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 30px;
+}
+
+.modalContainer button{
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+}
+
+/* End Modal */
+
+.painel-producao-container{
+    width: 100%;
+    height: auto;
+}
+
+#main-table{
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+#main-table td, #main-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+#main-table tr:nth-child(even){background-color: #f2f2f2;}
+  
+#main-table tr:hover {background-color: #ddd;}
+  
+#main-table th {
+    font-size: 14px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #FFFFFF;
+    color: #3f4646;
+}
+
+.add{
+    width: 100px;
+    display: flex;
+    padding: 20px;
+    float: right;
+    cursor: pointer;
+}
+
+.add img{
+    width: 100%;
+    background: #3f4646;
+    border-radius: 50px;
+}
