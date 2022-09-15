@@ -44,6 +44,24 @@
 
 /* End Modal */
 
+.filters{
+    width: 600px;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.filters select, input, button{
+    width: 130px;
+    height: 40px;
+    cursor: pointer;
+    text-align: center;
+}
+
 .painel-producao-container{
     width: 100%;
     height: auto;
@@ -58,6 +76,7 @@
 #main-table td, #main-table th {
     border: 1px solid #ddd;
     padding: 8px;
+    cursor: pointer;
 }
   
 #main-table tr:nth-child(even){background-color: #f2f2f2;}

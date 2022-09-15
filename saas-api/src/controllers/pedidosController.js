@@ -93,6 +93,45 @@ const PedidosController = {
         await Pedidos.add(obj) 
 
         res.json({data: true, msg: 'Pedido adicionado com sucesso'})
+    },
+
+    async dateFilter (req, res) {
+
+        let table = req.body.optionFilter
+        let startDate = moment(req.body.startDate).format('YYYY-MM-DD 00:00:00')
+        let endDate = moment(req.body.endDate).format('YYYY-MM-DD 23:59:59')
+
+        const pedidos = await Pedidos.filterDate(table, startDate, endDate)
+
+        let json = []
+
+        for(let i in pedidos){
+
+            let data_recebimento = moment(pedidos[i].data_receb).format('YYYY-MM-DD')
+            let hora_recebimento = moment(pedidos[i].data_receb).format('LT')
+
+            json.push({
+                id: pedidos[i].id,
+                data_receb: data_recebimento,
+                hora_receb: hora_recebimento,
+                cliente: pedidos[i].cliente,
+                vale: (pedidos[i].vale==0 ? '' : parseInt(pedidos[i].vale)),
+                nota_fiscal: (pedidos[i].nota_fiscal==0 ? '' : parseInt(pedidos[i].nota_fiscal)), 
+                numero_pedido: (pedidos[i].numero_pedido==0 ? '' : parseInt(pedidos[i].numero_pedido)), 
+                qtd_volumes: (pedidos[i].qtd_volumes==0 ? '' : parseInt(pedidos[i].qtd_volumes)), 
+                peso: (pedidos[i].peso==0 ? '' : parseFloat(pedidos[i].peso)),
+                uni_med: pedidos[i].uni_med, 
+                valor_pedido: (pedidos[i].valor_pedido==0 ? '' : parseFloat(pedidos[i].valor_pedido)), 
+                tipo_faturamento: pedidos[i].tipo_faturamento, 
+                separado_por: pedidos[i].separado_por, 
+                separado_data: (pedidos[i].separado_data==null ? '' : moment(pedidos[i].separado_data).format('YYYY-MM-DD')),
+                observacoes: pedidos[i].observacoes, 
+                conf_motorista: (pedidos[i].conf_motorista==true ? 'SIM' : 'NÃO'),
+                data_entrega: (pedidos[i].data_entrega==null ? '' : moment(pedidos[i].data_entrega).format('YYYY-MM-DD'))
+            })
+        }
+
+        res.json({data: true, result: json})
     }
 
 }

@@ -39,6 +39,11 @@ const Header = () => {
             return
         }
 
+        if(option==='Painel'){
+            navigate('/Painel')
+            return
+        }
+
         navigate(`/Cadastro/${option}`)
     }
 
@@ -60,6 +65,7 @@ const Header = () => {
                             <option value="Produtos">Produtos</option>
                             <option value="Colaborador">Colaborador</option>
                             <option value="Transportadora">Transportadora</option>
+                            <option value="Painel">Painel</option>
                         </select>
                     </li>
                     <li>Gestão</li>

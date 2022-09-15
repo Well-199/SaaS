@@ -13,9 +13,10 @@ const PainelProducao = () => {
     const [pedidos, setPedidos] = useState([])
     const [modalIsOpen, setIsOpen] = useState(false)
 
-    const [itemId, setItemId] = useState('')
-    const [dataReceb, setDataReceb] = useState('')
-    const [horaReceb, setHoraReceb] = useState('')
+    const [optionFilter, setOptionFilter] = useState('data_receb')
+    const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD'))
+    const [endDate, setEndDate] = useState(moment().format('YYYY-MM-DD'))
+
     const [nomeCliente, setNomeCliente] = useState('')
     const [vale, setVale] = useState('')
     const [notaFiscal, setNotaFiscal] = useState('')
@@ -86,6 +87,29 @@ const PainelProducao = () => {
 
         if(res.data==false){
             alert(`${res.msg}`)
+        }
+
+    }
+
+    // filtra por data e tipo de data
+    async function filterDate () {
+
+        const req = await fetch(`${url}/dateFilter`, {
+            method: 'POST',
+            body: JSON.stringify({
+                optionFilter: optionFilter,
+                startDate: startDate,
+                endDate: endDate
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('systemToken')
+            }
+        })
+        const res = await req.json()
+
+        if(res.data==true){
+            setPedidos(res.result)
         }
 
     }
@@ -194,6 +218,26 @@ const PainelProducao = () => {
                 </div>
 
             </Modal>
+
+            <div className='filters'>
+                <select value={optionFilter}
+                    onChange={(e) => setOptionFilter(e.target.value)}>
+                    <option value="data_receb">Data de Receb</option>
+                    <option value="separado_data">Data de Separação</option>
+                    <option value="data_entrega">Data de Entrega</option>
+                </select>
+
+                <input type="date" 
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                />
+                <input type="date" 
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                />
+
+                <button onClick={filterDate}>BUSCAR</button>
+            </div>
 
             <table id='main-table'>
                 <tr>

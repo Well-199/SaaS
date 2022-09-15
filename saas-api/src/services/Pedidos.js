@@ -30,6 +30,13 @@ const Pedidos = {
         return rows[0]
     },
 
+    // filtra por data
+    filterDate: async (table, startDate, endDate) => {
+        const { rows } = await db.query(`
+            SELECT * FROM pedidos WHERE(${table} >=$1 AND ${table} <=$2)`, [startDate, endDate])
+        return rows
+    },
+
 }
 
 module.exports = Pedidos
