@@ -44,7 +44,7 @@ const Pedidos = {
         return rows[0]
     },
 
-    // Altera dados do pedido pelo id
+    // Altera dados do pedido pelo id 
     editar: async (obj) => {
         const { rows } = await db.query(`
             UPDATE 

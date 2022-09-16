@@ -199,10 +199,10 @@ const PedidosController = {
             return
         }
 
-        if(confMotorista==""){
-            res.json({data: false, msg: 'Selecione Conferido Motorista'})
-            return
-        }
+        // if(confMotorista==""){
+        //     res.json({data: false, msg: 'Selecione Conferido Motorista'})
+        //     return
+        // }
 
         // monta o objeto que vai ser enviado pra o banco
         let obj = {
@@ -219,7 +219,7 @@ const PedidosController = {
             separadoPor: separadoPor,
             separadoData: (separadoData=='' ? null : moment(separadoData).format('YYYY-MM-DD')),
             observacoes: observacoes,
-            confMotorista: Boolean(confMotorista),
+            confMotorista: confMotorista,
             dataEntrega: (dataEntrega=='' ? null : moment(dataEntrega).format('YYYY-MM-DD'))
         }
 

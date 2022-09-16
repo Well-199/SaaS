@@ -25,8 +25,12 @@ const EditarPedido = () => {
     const [separadoPor, setSeparadoPor] = useState('')
     const [separadoData, setSeparadoData] = useState('')
     const [observacoes, setObservacoes] = useState('')
-    const [confMotorista, setConfMotorista] = useState('')
+    const [confMotorista, setConfMotorista] = useState()
     const [dataEntrega, setDataEntrega] = useState('')
+
+    console.log(confMotorista)
+
+    console.log(uniMedida)
 
     // Busca um unico pedido pelo id
     async function pedidoInfo () {
