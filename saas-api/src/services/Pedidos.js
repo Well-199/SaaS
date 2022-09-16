@@ -37,6 +37,34 @@ const Pedidos = {
         return rows
     },
 
+    // Busca um unico pedido
+    find: async (id) => {
+        const { rows } = await db.query(`
+            SELECT * FROM pedidos WHERE(id=$1)`, [id])
+        return rows[0]
+    },
+
+    // Altera dados do pedido pelo id
+    editar: async (obj) => {
+        const { rows } = await db.query(`
+            UPDATE 
+                pedidos 
+            SET 
+                cliente=$1, vale=$2, nota_fiscal=$3, numero_pedido=$4, qtd_volumes=$5, 
+                peso=$6, uni_med=$7, valor_pedido=$8, tipo_faturamento=$9, separado_por=$10,
+                separado_data=$11, observacoes=$12, conf_motorista=$13, data_entrega=$14,
+                modified=current_timestamp
+            WHERE 
+                (id=$15)`, 
+            [
+                obj.nomeCliente, obj.vale, obj.notaFiscal, obj.numPedido,
+                obj.qtdVolumes, obj.peso, obj.uniMedida, obj.valorPedido, 
+                obj.tipoFaturamento, obj.separadoPor, obj.separadoData,
+                obj.observacoes, obj.confMotorista, obj.dataEntrega, obj.id
+            ])
+        return rows[0]
+    },
+
 }
 
 module.exports = Pedidos

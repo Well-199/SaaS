@@ -16,4 +16,8 @@ router.post('/add-item', Auth.private, PedidosController.addItem)
 
 router.post('/dateFilter', Auth.private, PedidosController.dateFilter)
 
+router.post('/findById', Auth.private, PedidosController.findById)
+
+router.post('/edit', Auth.private, PedidosController.edit)
+
 module.exports = router

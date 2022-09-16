@@ -1,0 +1,45 @@
+
+.editContainer{
+    width: 100%;
+    height: auto;
+}
+
+.editMain{
+    width: 600px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+
+.editMain input{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+.editMain select{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.editButtons{
+    width: 350px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.editButtons button{
+    cursor: pointer;
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal';
 import { modalStyles } from '../styles/modal'
+import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import add from '../images/add.png'
 import url from '../services/api'
@@ -220,7 +221,7 @@ const PainelProducao = () => {
             </Modal>
 
             <div className='filters'>
-                <select value={optionFilter}
+                <select className='filterInputs' value={optionFilter}
                     onChange={(e) => setOptionFilter(e.target.value)}>
                     <option value="data_receb">Data de Receb</option>
                     <option value="separado_data">Data de Separação</option>
@@ -228,15 +229,17 @@ const PainelProducao = () => {
                 </select>
 
                 <input type="date" 
+                    className='filterInputs'
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                 />
                 <input type="date" 
+                    className='filterInputs'
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                 />
 
-                <button onClick={filterDate}>BUSCAR</button>
+                <button className='filterInputs' onClick={filterDate}>BUSCAR</button>
             </div>
 
             <table id='main-table'>
@@ -257,6 +260,7 @@ const PainelProducao = () => {
                     <th>Observaçoes</th>
                     <th>Conf. Motorista</th>
                     <th>Data Entrega</th>
+                    <th>Editar</th>
                 </tr>
                 {pedidos.map(item => 
                 <tr key={item.id}>
@@ -281,6 +285,11 @@ const PainelProducao = () => {
                     <td>{item.conf_motorista}</td>
                     <td>
                         {item.data_entrega=='' ? '' : moment(item.data_entrega).format('DD/MM/YYYY')}
+                    </td>
+                    <td>
+                        <Link to={`/Editar/${item.id}`}>
+                        <button className='filterInputs'>EDITAR</button>
+                        </Link>
                     </td>
                 </tr>
                 )}
