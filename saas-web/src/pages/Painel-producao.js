@@ -30,7 +30,6 @@ const PainelProducao = () => {
     const [separadoPor, setSeparadoPor] = useState('')
     const [separadoData, setSeparadoData] = useState('')
     const [observacoes, setObservacoes] = useState('')
-    const [confMotorista, setConfMotorista] = useState('')
     const [dataEntrega, setDataEntrega] = useState('')
 
     // Puxa os dados do pedidos (Colocar filtro de data)
@@ -69,7 +68,6 @@ const PainelProducao = () => {
                 separadoPor: separadoPor,
                 separadoData: separadoData,
                 observacoes: observacoes,
-                confMotorista: confMotorista,
                 dataEntrega: dataEntrega
             }),
             headers: {
@@ -198,14 +196,6 @@ const PainelProducao = () => {
                         onChange={(e) => setObservacoes(e.target.value.toUpperCase())}
                     />
 
-                    <label>Conf. Motorista</label>
-                    <select value={confMotorista}
-                        onChange={(e) => setConfMotorista(e.target.value)}>
-                        <option value="">Selecione</option>
-                        <option value={true}>SIM</option>
-                        <option value={false}>NÃO</option>
-                    </select>
-
                     <label>Data Entrega</label>
                     <input type="date" 
                         value={dataEntrega}
@@ -258,7 +248,7 @@ const PainelProducao = () => {
                     <th>Separado Por</th>
                     <th>Data Separação</th>
                     <th>Observaçoes</th>
-                    <th>Conf. Motorista</th>
+                    <th></th>
                     <th>Data Entrega</th>
                     <th>Editar</th>
                 </tr>
@@ -282,7 +272,7 @@ const PainelProducao = () => {
                         {item.separado_data=='' ? '' : moment(item.separado_data).format('DD/MM/YYYY')}
                     </td>
                     <td>{item.observacoes}</td>
-                    <td>{item.conf_motorista}</td>
+                    <td></td>
                     <td>
                         {item.data_entrega=='' ? '' : moment(item.data_entrega).format('DD/MM/YYYY')}
                     </td>

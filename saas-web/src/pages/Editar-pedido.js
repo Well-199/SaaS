@@ -25,12 +25,7 @@ const EditarPedido = () => {
     const [separadoPor, setSeparadoPor] = useState('')
     const [separadoData, setSeparadoData] = useState('')
     const [observacoes, setObservacoes] = useState('')
-    const [confMotorista, setConfMotorista] = useState()
     const [dataEntrega, setDataEntrega] = useState('')
-
-    console.log(confMotorista)
-
-    console.log(uniMedida)
 
     // Busca um unico pedido pelo id
     async function pedidoInfo () {
@@ -64,7 +59,6 @@ const EditarPedido = () => {
             setSeparadoPor(res.result.separado_por)
             setSeparadoData(res.result.separado_data)
             setObservacoes(res.result.observacoes)
-            setConfMotorista(res.result.conf_motorista)
             setDataEntrega(res.result.data_entrega)
 
         }
@@ -89,7 +83,6 @@ const EditarPedido = () => {
                 separadoPor: separadoPor,
                 separadoData: separadoData,
                 observacoes: observacoes,
-                confMotorista: confMotorista,
                 dataEntrega: dataEntrega
             }),
             headers: {
@@ -207,14 +200,6 @@ const EditarPedido = () => {
                     value={observacoes}
                     onChange={(e) => setObservacoes(e.target.value.toUpperCase())}
                 />
-                
-                <label>Conferido Motorista ?</label>
-                <select value={confMotorista}
-                    onChange={(e) => setConfMotorista(e.target.value)}>
-                    <option value="">Selecione</option>
-                    <option value={true}>SIM</option>
-                    <option value={false}>NÃO</option>
-                </select>
 
                 <label>Data de Entrega</label>
                 <input type="date" 

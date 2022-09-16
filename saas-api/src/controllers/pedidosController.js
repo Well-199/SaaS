@@ -31,8 +31,7 @@ const PedidosController = {
                 tipo_faturamento: pedidos[i].tipo_faturamento, 
                 separado_por: pedidos[i].separado_por, 
                 separado_data: (pedidos[i].separado_data==null ? '' : moment(pedidos[i].separado_data).format('YYYY-MM-DD')),
-                observacoes: pedidos[i].observacoes, 
-                conf_motorista: (pedidos[i].conf_motorista==true ? 'SIM' : 'NÃO'),
+                observacoes: pedidos[i].observacoes,
                 data_entrega: (pedidos[i].data_entrega==null ? '' : moment(pedidos[i].data_entrega).format('YYYY-MM-DD'))
             })
         }
@@ -54,7 +53,6 @@ const PedidosController = {
         let separadoPor = req.body.separadoPor
         let separadoData = req.body.separadoData
         let observacoes = req.body.observacoes
-        let confMotorista = req.body.confMotorista
         let dataEntrega = req.body.dataEntrega
 
         if(nomeCliente==""){
@@ -64,11 +62,6 @@ const PedidosController = {
 
         if(uniMedida==""){
             res.json({data: false, msg: 'Selecione unidade de medida'})
-            return
-        }
-
-        if(confMotorista==""){
-            res.json({data: false, msg: 'Selecione Conferido Motorista'})
             return
         }
 
@@ -86,7 +79,6 @@ const PedidosController = {
             separadoPor: separadoPor,
             separadoData: (separadoData=='' ? null : moment(separadoData).format('YYYY-MM-DD')),
             observacoes: observacoes,
-            confMotorista: Boolean(confMotorista),
             dataEntrega: (dataEntrega=='' ? null : moment(dataEntrega).format('YYYY-MM-DD'))
         }
 
@@ -126,7 +118,6 @@ const PedidosController = {
                 separado_por: pedidos[i].separado_por, 
                 separado_data: (pedidos[i].separado_data==null ? '' : moment(pedidos[i].separado_data).format('YYYY-MM-DD')),
                 observacoes: pedidos[i].observacoes, 
-                conf_motorista: (pedidos[i].conf_motorista==true ? 'SIM' : 'NÃO'),
                 data_entrega: (pedidos[i].data_entrega==null ? '' : moment(pedidos[i].data_entrega).format('YYYY-MM-DD'))
             })
         }
@@ -159,7 +150,6 @@ const PedidosController = {
             separado_por: pedido.separado_por, 
             separado_data: (pedido.separado_data==null ? '' : moment(pedido.separado_data).format('YYYY-MM-DD')),
             observacoes: pedido.observacoes, 
-            conf_motorista: pedido.conf_motorista,
             data_entrega: (pedido.data_entrega==null ? '' : moment(pedido.data_entrega).format('YYYY-MM-DD'))
         }
 
@@ -181,7 +171,6 @@ const PedidosController = {
         let separadoPor = req.body.separadoPor
         let separadoData = req.body.separadoData
         let observacoes = req.body.observacoes
-        let confMotorista = req.body.confMotorista
         let dataEntrega = req.body.dataEntrega
 
         if(!id){
@@ -199,11 +188,6 @@ const PedidosController = {
             return
         }
 
-        // if(confMotorista==""){
-        //     res.json({data: false, msg: 'Selecione Conferido Motorista'})
-        //     return
-        // }
-
         // monta o objeto que vai ser enviado pra o banco
         let obj = {
             id: parseInt(id),
@@ -219,7 +203,6 @@ const PedidosController = {
             separadoPor: separadoPor,
             separadoData: (separadoData=='' ? null : moment(separadoData).format('YYYY-MM-DD')),
             observacoes: observacoes,
-            confMotorista: confMotorista,
             dataEntrega: (dataEntrega=='' ? null : moment(dataEntrega).format('YYYY-MM-DD'))
         }
 

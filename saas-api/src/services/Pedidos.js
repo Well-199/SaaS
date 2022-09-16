@@ -16,15 +16,15 @@ const Pedidos = {
                 (
                     cliente, vale, nota_fiscal, numero_pedido, qtd_volumes, peso,
                     uni_med, valor_pedido, tipo_faturamento, separado_por,
-                    separado_data, observacoes, conf_motorista, data_entrega 
+                    separado_data, observacoes, data_entrega 
                 ) 
             values
-                ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)`,
+                ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
             [
                 obj.nomeCliente, obj.vale, obj.notaFiscal, obj.numPedido,
                 obj.qtdVolumes, obj.peso, obj.uniMedida, obj.valorPedido, 
                 obj.tipoFaturamento, obj.separadoPor, obj.separadoData,
-                obj.observacoes, obj.confMotorista, obj.dataEntrega
+                obj.observacoes, obj.dataEntrega
             ]
         )
         return rows[0]
@@ -52,15 +52,15 @@ const Pedidos = {
             SET 
                 cliente=$1, vale=$2, nota_fiscal=$3, numero_pedido=$4, qtd_volumes=$5, 
                 peso=$6, uni_med=$7, valor_pedido=$8, tipo_faturamento=$9, separado_por=$10,
-                separado_data=$11, observacoes=$12, conf_motorista=$13, data_entrega=$14,
+                separado_data=$11, observacoes=$12, data_entrega=$13,
                 modified=current_timestamp
             WHERE 
-                (id=$15)`, 
+                (id=$14)`, 
             [
                 obj.nomeCliente, obj.vale, obj.notaFiscal, obj.numPedido,
                 obj.qtdVolumes, obj.peso, obj.uniMedida, obj.valorPedido, 
                 obj.tipoFaturamento, obj.separadoPor, obj.separadoData,
-                obj.observacoes, obj.confMotorista, obj.dataEntrega, obj.id
+                obj.observacoes, obj.dataEntrega, obj.id
             ])
         return rows[0]
     },
