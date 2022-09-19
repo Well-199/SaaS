@@ -47,7 +47,6 @@ const PedidosController = {
         let numPedido = req.body.numPedido
         let qtdVolumes = req.body.qtdVolumes
         let peso = req.body.peso
-        let uniMedida = req.body.uniMedida
         let valorPedido = req.body.valorPedido
         let tipoFaturamento = req.body.tipoFaturamento
         let separadoPor = req.body.separadoPor
@@ -60,11 +59,6 @@ const PedidosController = {
             return
         }
 
-        if(uniMedida==""){
-            res.json({data: false, msg: 'Selecione unidade de medida'})
-            return
-        }
-
         // monta o objeto que vai ser enviado pra o banco
         let obj = {
             nomeCliente: nomeCliente,
@@ -73,7 +67,6 @@ const PedidosController = {
             numPedido: (numPedido=='' ? 0 : parseInt(numPedido)),
             qtdVolumes: (qtdVolumes=='' ? 0 : parseInt(qtdVolumes)),
             peso: (peso=='' ? 0 : parseFloat(peso)),
-            uniMedida: uniMedida,
             valorPedido: (valorPedido=='' ? 0 : parseFloat(valorPedido)),
             tipoFaturamento: tipoFaturamento,
             separadoPor: separadoPor,
@@ -144,7 +137,6 @@ const PedidosController = {
             numero_pedido: parseInt(pedido.numero_pedido), 
             qtd_volumes: parseInt(pedido.qtd_volumes), 
             peso: parseFloat(pedido.peso),
-            uni_med: pedido.uni_med, 
             valor_pedido: parseFloat(pedido.valor_pedido), 
             tipo_faturamento: pedido.tipo_faturamento, 
             separado_por: pedido.separado_por, 
@@ -165,7 +157,6 @@ const PedidosController = {
         let numPedido = req.body.numPedido
         let qtdVolumes = req.body.qtdVolumes
         let peso = req.body.peso
-        let uniMedida = req.body.uniMedida
         let valorPedido = req.body.valorPedido
         let tipoFaturamento = req.body.tipoFaturamento
         let separadoPor = req.body.separadoPor
@@ -183,11 +174,6 @@ const PedidosController = {
             return
         }
 
-        if(uniMedida==""){
-            res.json({data: false, msg: 'Selecione unidade de medida'})
-            return
-        }
-
         // monta o objeto que vai ser enviado pra o banco
         let obj = {
             id: parseInt(id),
@@ -197,7 +183,6 @@ const PedidosController = {
             numPedido: (numPedido=='' ? 0 : parseInt(numPedido)),
             qtdVolumes: (qtdVolumes=='' ? 0 : parseInt(qtdVolumes)),
             peso: (peso=='' ? 0 : parseFloat(peso)),
-            uniMedida: uniMedida,
             valorPedido: (valorPedido=='' ? 0 : parseFloat(valorPedido)),
             tipoFaturamento: tipoFaturamento,
             separadoPor: separadoPor,

@@ -24,7 +24,6 @@ const PainelProducao = () => {
     const [numPedido, setNumPedido] = useState('')
     const [qtdVolumes, setQtdVolumes] = useState('')
     const [peso, setPeso] = useState('')
-    const [uniMedida, setUniMedida] = useState('')
     const [valorPedido, setValorPedido] = useState('')
     const [tipoFaturamento, setTipoFaturamento] = useState('')
     const [separadoPor, setSeparadoPor] = useState('')
@@ -62,7 +61,6 @@ const PainelProducao = () => {
                 numPedido: numPedido,
                 qtdVolumes: qtdVolumes,
                 peso: peso,
-                uniMedida: uniMedida,
                 valorPedido: valorPedido,
                 tipoFaturamento: tipoFaturamento,
                 separadoPor: separadoPor,
@@ -162,12 +160,7 @@ const PainelProducao = () => {
                     <input type="number" onChange={(e) => setPeso(e.target.value)}/>
 
                     <label>Uni Med</label>
-                    <select value={uniMedida}
-                        onChange={(e) => setUniMedida(e.target.value)}>
-                        <option value="">Selecione</option>
-                        <option value="CX">CX</option>
-                        <option value="KG">KG</option>
-                    </select>
+                    <input type="text" value="KG" disabled/>
 
                     <label>Valor Pedido</label>
                     <input type="text" onChange={(e) => setValorPedido(e.target.value)}/>
@@ -248,7 +241,6 @@ const PainelProducao = () => {
                     <th>Separado Por</th>
                     <th>Data Separação</th>
                     <th>Observaçoes</th>
-                    <th></th>
                     <th>Data Entrega</th>
                     <th>Editar</th>
                 </tr>
@@ -272,7 +264,6 @@ const PainelProducao = () => {
                         {item.separado_data=='' ? '' : moment(item.separado_data).format('DD/MM/YYYY')}
                     </td>
                     <td>{item.observacoes}</td>
-                    <td></td>
                     <td>
                         {item.data_entrega=='' ? '' : moment(item.data_entrega).format('DD/MM/YYYY')}
                     </td>

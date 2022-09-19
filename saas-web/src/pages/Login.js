@@ -41,7 +41,15 @@ const Login = () => {
     }
 
     useEffect(() => {
-        localStorage.removeItem('systemToken')
+        const isAuth = localStorage.getItem('systemToken')
+
+        if(isAuth==null){
+            navigate('/')
+        }
+        else{
+            navigate('/Painel')
+        }
+
     }, [])
 
     return(

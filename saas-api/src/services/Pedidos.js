@@ -3,7 +3,7 @@ const db = require('../config/connection')
 const Pedidos = {
 
     // Traz todos os pedidos por data
-    findAll: async (email) => {
+    findAll: async () => {
         const { rows } = await db.query(`
             SELECT * FROM pedidos`)
         return rows
@@ -22,7 +22,7 @@ const Pedidos = {
                 ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
             [
                 obj.nomeCliente, obj.vale, obj.notaFiscal, obj.numPedido,
-                obj.qtdVolumes, obj.peso, obj.uniMedida, obj.valorPedido, 
+                obj.qtdVolumes, obj.peso, 'KG', obj.valorPedido, 
                 obj.tipoFaturamento, obj.separadoPor, obj.separadoData,
                 obj.observacoes, obj.dataEntrega
             ]
@@ -51,14 +51,14 @@ const Pedidos = {
                 pedidos 
             SET 
                 cliente=$1, vale=$2, nota_fiscal=$3, numero_pedido=$4, qtd_volumes=$5, 
-                peso=$6, uni_med=$7, valor_pedido=$8, tipo_faturamento=$9, separado_por=$10,
-                separado_data=$11, observacoes=$12, data_entrega=$13,
+                peso=$6, valor_pedido=$7, tipo_faturamento=$8, separado_por=$9,
+                separado_data=$10, observacoes=$11, data_entrega=$12,
                 modified=current_timestamp
             WHERE 
-                (id=$14)`, 
+                (id=$13)`, 
             [
                 obj.nomeCliente, obj.vale, obj.notaFiscal, obj.numPedido,
-                obj.qtdVolumes, obj.peso, obj.uniMedida, obj.valorPedido, 
+                obj.qtdVolumes, obj.peso, obj.valorPedido, 
                 obj.tipoFaturamento, obj.separadoPor, obj.separadoData,
                 obj.observacoes, obj.dataEntrega, obj.id
             ])

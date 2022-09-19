@@ -19,7 +19,6 @@ const EditarPedido = () => {
     const [numPedido, setNumPedido] = useState('')
     const [qtdVolumes, setQtdVolumes] = useState('')
     const [peso, setPeso] = useState('')
-    const [uniMedida, setUniMedida] = useState('')
     const [valorPedido, setValorPedido] = useState('')
     const [tipoFaturamento, setTipoFaturamento] = useState('')
     const [separadoPor, setSeparadoPor] = useState('')
@@ -53,7 +52,6 @@ const EditarPedido = () => {
             setNumPedido(res.result.numero_pedido)
             setQtdVolumes(res.result.qtd_volumes)
             setPeso(res.result.peso)
-            setUniMedida(res.result.uni_med)
             setValorPedido(res.result.valor_pedido)
             setTipoFaturamento(res.result.tipo_faturamento)
             setSeparadoPor(res.result.separado_por)
@@ -77,7 +75,6 @@ const EditarPedido = () => {
                 numPedido: numPedido,
                 qtdVolumes: qtdVolumes,
                 peso: peso,
-                uniMedida: uniMedida,
                 valorPedido: valorPedido,
                 tipoFaturamento: tipoFaturamento,
                 separadoPor: separadoPor,
@@ -164,12 +161,7 @@ const EditarPedido = () => {
                 />
 
                 <label>Unidade de Medida</label>
-                <select value={uniMedida}
-                    onChange={(e) => setUniMedida(e.target.value)}>
-                    <option value="">Selecione</option>
-                    <option value="KG">KG</option>
-                    <option value="CX">CX</option>
-                </select>
+                <input type="text" value="KG" disabled/>
 
                 <label>Valor do Pedido</label>
                 <input type="text" 

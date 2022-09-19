@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import '../styles/header.css'
 import { useNavigate, Link } from 'react-router-dom'
+import cadeado from '../images/cadeado.png'
+import check from '../images/accept.png'
+import sair from '../images/sair.png'
 import logoInput from '../images/logo.png'
 import url from '../services/api'
 
@@ -27,6 +30,12 @@ const Header = () => {
     
     }
 
+    async function logout () {
+        localStorage.removeItem('systemToken')
+        navigate('/')
+    }
+
+
     useEffect(() => {
         getUser()
     }, [])
@@ -39,11 +48,6 @@ const Header = () => {
             return
         }
 
-        if(option==='Painel'){
-            navigate('/Painel')
-            return
-        }
-
         navigate(`/Cadastro/${option}`)
     }
 
@@ -51,13 +55,13 @@ const Header = () => {
         <header className='home-header'>
 
             <div className='home-logo'>
-                <Link to="/Home"><img src={logoInput} alt="logo"/></Link>
+                <Link to="/Painel"><img src={logoInput} alt="logo"/></Link>
             </div>
 
             <div className='home-menu'>
                 <ul>
                     <li>
-                        <select value={selectValue} 
+                        {/* <select value={selectValue} 
                             className='select-cadastro' onChange={(e) => cadOptions(e.target.value)}
                         >
                             <option value="Cadastro">Cadastro</option>
@@ -65,19 +69,22 @@ const Header = () => {
                             <option value="Produtos">Produtos</option>
                             <option value="Colaborador">Colaborador</option>
                             <option value="Transportadora">Transportadora</option>
-                            <option value="Painel">Painel</option>
-                        </select>
+                        </select> */}
                     </li>
-                    <li>Gestão</li>
-                    <li>Financeiro</li>
-                    <li>Compras</li>
-                    <li>Vendas</li>
+                    <li><img className='block' src={cadeado} />Gestão</li>
+                    <li><img className='block' src={cadeado} />Financeiro</li>
+                    <li><img className='block' src={cadeado} />Compras</li>
+                    <li><img className='payment' src={check} /><Link to="/Painel" className='link'>Vendas</Link></li>
                 </ul>
             </div>
 
             <div className='home-welcome'>
                 <p className='home-username'>Olá! {name}</p>
                 <p className='home-company'>{company}</p>
+            </div>
+
+            <div className='sair' onClick={logout}>
+                <img src={sair} alt="sair" />
             </div>
 
         </header>
