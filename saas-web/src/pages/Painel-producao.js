@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal';
 import { modalStyles } from '../styles/modal'
+import IntlCurrencyInput from "react-intl-currency-input"
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import add from '../images/add.png'
@@ -139,6 +140,47 @@ const PainelProducao = () => {
         window.location.reload()
     }
 
+    // Formatação de moeda pt-br
+    const currencyConfig = {
+        locale: "pt-BR",
+            formats: {
+                number: {
+                    BRL: {
+                    style: "currency",
+                    currency: "BRL",
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                },
+            },
+        },
+    }
+
+    // pega o valor em float do input valor do pedido
+    const handleChange = (event, value, maskedValue) => {
+        event.preventDefault()
+        setValorPedido(value)
+    }
+
+    // Formatação de Peso
+    const pesoConfig = {
+        locale: "en-US",
+            formats: {
+                number: {
+                    BRL: {
+                    currency: "USD",
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                },
+            },
+        },
+    }
+
+    // pega o valor em float do input peso
+    const pesoHandleChange = (event, value, maskedValue) => {
+        event.preventDefault()
+        setPeso(value)
+    }
+
     // fecha o modal e limpa os states
     function closeModal() {
         setIsOpen(false)
@@ -185,13 +227,23 @@ const PainelProducao = () => {
                     <input type="number" onChange={(e) => setQtdVolumes(e.target.value)}/>
 
                     <label>Peso</label>
-                    <input type="number" onChange={(e) => setPeso(e.target.value)}/>
+                    <IntlCurrencyInput 
+                        currency="BRL" 
+                        config={pesoConfig}
+                        value={peso}
+                        onChange={pesoHandleChange} 
+                    />
 
                     <label>Uni Med</label>
                     <input type="text" value="KG" disabled/>
 
                     <label>Valor Pedido</label>
-                    <input type="text" onChange={(e) => setValorPedido(e.target.value)}/>
+                    <IntlCurrencyInput 
+                        currency="BRL" 
+                        config={currencyConfig}
+                        value={valorPedido}
+                        onChange={handleChange} 
+                    />
 
                     <label>Tipo Faturamento</label>
                     <input type="text" 
