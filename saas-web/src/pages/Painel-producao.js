@@ -17,8 +17,8 @@ const PainelProducao = () => {
     const [modalIsOpen, setIsOpen] = useState(false)
 
     const [optionFilter, setOptionFilter] = useState('data_entrega')
-    const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD'))
-    const [endDate, setEndDate] = useState(moment().format('YYYY-MM-DD'))
+    const [startDate, setStartDate] = useState(moment().add(1, 'day').format('YYYY-MM-DD'))
+    const [endDate, setEndDate] = useState(moment().add(1, 'day').format('YYYY-MM-DD'))
 
     const [nomeCliente, setNomeCliente] = useState('')
     const [vale, setVale] = useState('')
@@ -192,6 +192,19 @@ const PainelProducao = () => {
         setIsOpen(true)
     }
 
+    function colorChange(item){
+
+        if(item.vale==''){
+            return {'background':'#e67e22'}
+        }
+        else if(item.vale!=='' && item.separado_por==''){
+            return {'background':'#e74c3c'}
+        }
+        else if(item.separado_por!==''){
+            return {'background':'#2ecc71'}  
+        }
+    }
+
     useEffect(() => {
         listAll()
     }, [])
@@ -313,27 +326,27 @@ const PainelProducao = () => {
 
             <table id='main-table'>
                 <tr>
-                    <th>Data Receb.</th>
-                    <th>Hora Receb.</th>
-                    <th>Nome Cliente</th>
-                    <th>Vale</th>
-                    <th>Nota Fiscal</th>
-                    <th>Nº Pedido Cliente</th>
-                    <th>QTD Volumes</th>
-                    <th>Peso</th>
-                    <th>Uni Med</th>
-                    <th>Valor Pedido</th>
-                    <th>Tipo Faturamento</th>
-                    <th>Separado Por</th>
-                    <th>Data Separação</th>
-                    <th>Observaçoes</th>
-                    <th>Roteiro</th>
-                    <th>Data Entrega</th>
-                    <th>Conf Nfe</th>
-                    <th>Editar</th>
+                    <th style={{'background':'#95b3d7'}}>Data Receb.</th>
+                    <th style={{'background':'#95b3d7'}}>Hora Receb.</th>
+                    <th style={{'background':'#95b3d7'}}>Nome Cliente</th>
+                    <th style={{'background':'#00b04f'}}>Vale</th>
+                    <th style={{'background':'#af78d6'}}>Nota Fiscal</th>
+                    <th style={{'background':'#00b04f'}}>Nº Pedido Cliente</th>
+                    <th style={{'background':'#af78d6'}}>QTD Volumes</th>
+                    <th style={{'background':'#af78d6'}}>Peso</th>
+                    <th style={{'background':'#a5a5a5'}}>Uni Med</th>
+                    <th style={{'background':'#00b04f'}}>Valor Pedido</th>
+                    <th style={{'background':'#00b04f'}}>Tipo Faturamento</th>
+                    <th style={{'background':'#af78d6'}}>Separado Por</th>
+                    <th style={{'background':'#af78d6'}}>Data Separação</th>
+                    <th style={{'background':'#a5a5a5'}}>Observaçoes</th>
+                    <th style={{'background':'#af78d6'}}>Roteiro</th>
+                    <th style={{'background':'#af78d6'}}>Data Entrega</th>
+                    <th style={{'background':'#af78d6'}}>Conf Nfe</th>
+                    <th style={{'background':'#a5a5a5'}}>Editar</th>
                 </tr>
                 {pedidos.map(item => 
-                <tr key={item.id}>
+                <tr key={item.id} style={colorChange(item)}>
                     <td>{moment(item.data_receb).format('DD/MM/YYYY')}</td>
                     <td>{item.hora_receb}</td>
                     <td>{item.cliente}</td>
@@ -351,7 +364,7 @@ const PainelProducao = () => {
                     <td>
                         {item.separado_data=='' ? '' : moment(item.separado_data).format('DD/MM/YYYY')}
                     </td>
-                    <td>{item.observacoes}</td>
+                    <td style={item.observacoes!=='' ? {'background':'#FDA7DF'} : colorChange(item)}>{item.observacoes}</td>
                     <td>{item.roteiro}</td>
                     <td>
                         {item.data_entrega=='' ? '' : moment(item.data_entrega).format('DD/MM/YYYY')}
