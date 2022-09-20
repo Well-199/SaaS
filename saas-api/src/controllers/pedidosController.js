@@ -7,7 +7,10 @@ const PedidosController = {
 
     async listAll (req, res) {
 
-        const pedidos = await Pedidos.findAll()
+        let startDate = moment().add(1, 'day').format('YYYY-MM-DD 00:00:00')
+        let endDate = moment().add(1, 'day').format('YYYY-MM-DD 23:59:59')
+
+        const pedidos = await Pedidos.findAll(startDate, endDate)
 
         let json = []
 
@@ -31,8 +34,10 @@ const PedidosController = {
                 tipo_faturamento: pedidos[i].tipo_faturamento, 
                 separado_por: pedidos[i].separado_por, 
                 separado_data: (pedidos[i].separado_data==null ? '' : moment(pedidos[i].separado_data).format('YYYY-MM-DD')),
+                roteiro: pedidos[i].roteiro,
                 observacoes: pedidos[i].observacoes,
-                data_entrega: (pedidos[i].data_entrega==null ? '' : moment(pedidos[i].data_entrega).format('YYYY-MM-DD'))
+                data_entrega: (pedidos[i].data_entrega==null ? '' : moment(pedidos[i].data_entrega).format('YYYY-MM-DD')),
+                conf_nfe: pedidos[i].conf_nfe
             })
         }
 
@@ -52,6 +57,7 @@ const PedidosController = {
         let separadoPor = req.body.separadoPor
         let separadoData = req.body.separadoData
         let observacoes = req.body.observacoes
+        let roteiro = req.body.roteiro
         let dataEntrega = req.body.dataEntrega
 
         if(nomeCliente==""){
@@ -72,6 +78,7 @@ const PedidosController = {
             separadoPor: separadoPor,
             separadoData: (separadoData=='' ? null : moment(separadoData).format('YYYY-MM-DD')),
             observacoes: observacoes,
+            roteiro: roteiro,
             dataEntrega: (dataEntrega=='' ? null : moment(dataEntrega).format('YYYY-MM-DD'))
         }
 
@@ -111,7 +118,9 @@ const PedidosController = {
                 separado_por: pedidos[i].separado_por, 
                 separado_data: (pedidos[i].separado_data==null ? '' : moment(pedidos[i].separado_data).format('YYYY-MM-DD')),
                 observacoes: pedidos[i].observacoes, 
-                data_entrega: (pedidos[i].data_entrega==null ? '' : moment(pedidos[i].data_entrega).format('YYYY-MM-DD'))
+                roteiro: pedidos[i].roteiro,
+                data_entrega: (pedidos[i].data_entrega==null ? '' : moment(pedidos[i].data_entrega).format('YYYY-MM-DD')),
+                conf_nfe: pedidos[i].conf_nfe
             })
         }
 
@@ -142,7 +151,9 @@ const PedidosController = {
             separado_por: pedido.separado_por, 
             separado_data: (pedido.separado_data==null ? '' : moment(pedido.separado_data).format('YYYY-MM-DD')),
             observacoes: pedido.observacoes, 
-            data_entrega: (pedido.data_entrega==null ? '' : moment(pedido.data_entrega).format('YYYY-MM-DD'))
+            roteiro: (pedido.roteiro==null ? '' : pedido.roteiro),
+            data_entrega: (pedido.data_entrega==null ? '' : moment(pedido.data_entrega).format('YYYY-MM-DD')),
+            conf_nfe: pedido.conf_nfe
         }
 
         res.json({data: true, result: json})
@@ -162,6 +173,7 @@ const PedidosController = {
         let separadoPor = req.body.separadoPor
         let separadoData = req.body.separadoData
         let observacoes = req.body.observacoes
+        let roteiro = req.body.roteiro
         let dataEntrega = req.body.dataEntrega
 
         if(!id){
@@ -188,10 +200,27 @@ const PedidosController = {
             separadoPor: separadoPor,
             separadoData: (separadoData=='' ? null : moment(separadoData).format('YYYY-MM-DD')),
             observacoes: observacoes,
+            roteiro: (roteiro=='' ? null : roteiro),
             dataEntrega: (dataEntrega=='' ? null : moment(dataEntrega).format('YYYY-MM-DD'))
         }
 
         await Pedidos.editar(obj)
+
+        res.json({data: true})
+    },
+
+    // altera o status se a nota foi conferida ou não
+    async isConfNfe (req, res) {
+
+        let id = req.body.id
+        let value = req.body.value
+
+        if(!id){
+            res.json({data: false})
+            return
+        }
+
+        await Pedidos.statusChangeConfNfe(value, parseInt(id))
 
         res.json({data: true})
     }

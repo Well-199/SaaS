@@ -24,6 +24,7 @@ const EditarPedido = () => {
     const [separadoPor, setSeparadoPor] = useState('')
     const [separadoData, setSeparadoData] = useState('')
     const [observacoes, setObservacoes] = useState('')
+    const [roteiro, setRoteiro] = useState('')
     const [dataEntrega, setDataEntrega] = useState('')
 
     // Busca um unico pedido pelo id
@@ -57,6 +58,7 @@ const EditarPedido = () => {
             setSeparadoPor(res.result.separado_por)
             setSeparadoData(res.result.separado_data)
             setObservacoes(res.result.observacoes)
+            setRoteiro(res.result.roteiro)
             setDataEntrega(res.result.data_entrega)
 
         }
@@ -80,6 +82,7 @@ const EditarPedido = () => {
                 separadoPor: separadoPor,
                 separadoData: separadoData,
                 observacoes: observacoes,
+                roteiro: roteiro,
                 dataEntrega: dataEntrega
             }),
             headers: {
@@ -191,6 +194,12 @@ const EditarPedido = () => {
                 <input type="text" 
                     value={observacoes}
                     onChange={(e) => setObservacoes(e.target.value.toUpperCase())}
+                />
+
+                <label>Roteiro</label>
+                <input type="text" 
+                    value={roteiro}
+                    onChange={(e) => setRoteiro(e.target.value.toUpperCase())}
                 />
 
                 <label>Data de Entrega</label>

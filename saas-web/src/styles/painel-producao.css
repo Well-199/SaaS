@@ -62,8 +62,18 @@
     text-align: center;
 }
 
-.filterInputs{
+.inputEdit{
+    width: 25px;
     cursor: pointer;
+    margin-left: 5px;
+}
+
+[type="checkbox"]{
+    width: 20px;
+    display: flex;
+    cursor: pointer;
+    margin-left: 5px;
+    align-self: center;
 }
 
 .painel-producao-container{

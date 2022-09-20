@@ -20,4 +20,6 @@ router.post('/findById', Auth.private, PedidosController.findById)
 
 router.post('/edit', Auth.private, PedidosController.edit)
 
+router.post('/isConfNfe', Auth.private, PedidosController.isConfNfe)
+
 module.exports = router

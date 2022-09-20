@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import add from '../images/add.png'
 import url from '../services/api'
+import edit from '../images/edit.png'
 import moment from 'moment'
 
 import '../styles/painel-producao.css'
@@ -14,7 +15,7 @@ const PainelProducao = () => {
     const [pedidos, setPedidos] = useState([])
     const [modalIsOpen, setIsOpen] = useState(false)
 
-    const [optionFilter, setOptionFilter] = useState('data_receb')
+    const [optionFilter, setOptionFilter] = useState('data_entrega')
     const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD'))
     const [endDate, setEndDate] = useState(moment().format('YYYY-MM-DD'))
 
@@ -29,6 +30,7 @@ const PainelProducao = () => {
     const [separadoPor, setSeparadoPor] = useState('')
     const [separadoData, setSeparadoData] = useState('')
     const [observacoes, setObservacoes] = useState('')
+    const [roteiro, setRoteiro] = useState('')
     const [dataEntrega, setDataEntrega] = useState('')
 
     // Puxa os dados do pedidos (Colocar filtro de data)
@@ -66,6 +68,7 @@ const PainelProducao = () => {
                 separadoPor: separadoPor,
                 separadoData: separadoData,
                 observacoes: observacoes,
+                roteiro: roteiro,
                 dataEntrega: dataEntrega
             }),
             headers: {
@@ -109,6 +112,31 @@ const PainelProducao = () => {
             setPedidos(res.result)
         }
 
+    }
+
+    // Alterar o valor do chebox
+    async function isNfeConf (id, value) {
+
+        const req = await fetch(`${url}/isConfNfe`, {
+            method: 'POST',
+            body: JSON.stringify({
+                id: id,
+                value: value
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('systemToken')
+            }
+        })
+        const res = await req.json()
+
+        if(res.data==true){
+            window.location.reload()
+            return
+        }
+
+        alert('ERRO AO ALTERAR CONF NFE')
+        window.location.reload()
     }
 
     // fecha o modal e limpa os states
@@ -189,6 +217,12 @@ const PainelProducao = () => {
                         onChange={(e) => setObservacoes(e.target.value.toUpperCase())}
                     />
 
+                    <label>Roteiro</label>
+                    <input type="text" 
+                        value={roteiro}
+                        onChange={(e) => setRoteiro(e.target.value.toUpperCase())}
+                    />
+
                     <label>Data Entrega</label>
                     <input type="date" 
                         value={dataEntrega}
@@ -206,9 +240,9 @@ const PainelProducao = () => {
             <div className='filters'>
                 <select className='filterInputs' value={optionFilter}
                     onChange={(e) => setOptionFilter(e.target.value)}>
-                    <option value="data_receb">Data de Receb</option>
-                    <option value="separado_data">Data de Separação</option>
                     <option value="data_entrega">Data de Entrega</option>
+                    <option value="data_receb">Data de Receb</option>
+                    <option value="separado_data">Data de Separação</option> 
                 </select>
 
                 <input type="date" 
@@ -241,7 +275,9 @@ const PainelProducao = () => {
                     <th>Separado Por</th>
                     <th>Data Separação</th>
                     <th>Observaçoes</th>
+                    <th>Roteiro</th>
                     <th>Data Entrega</th>
+                    <th>Conf Nfe</th>
                     <th>Editar</th>
                 </tr>
                 {pedidos.map(item => 
@@ -264,12 +300,19 @@ const PainelProducao = () => {
                         {item.separado_data=='' ? '' : moment(item.separado_data).format('DD/MM/YYYY')}
                     </td>
                     <td>{item.observacoes}</td>
+                    <td>{item.roteiro}</td>
                     <td>
                         {item.data_entrega=='' ? '' : moment(item.data_entrega).format('DD/MM/YYYY')}
                     </td>
                     <td>
+                        <input type="checkbox" 
+                            checked={item.conf_nfe}
+                            onChange={(e) => isNfeConf(item.id, e.target.checked)}
+                        />
+                    </td>
+                    <td>
                         <Link to={`/Editar/${item.id}`}>
-                        <button className='filterInputs'>EDITAR</button>
+                            <img className='inputEdit' src={edit} alt="editar"/>
                         </Link>
                     </td>
                 </tr>
