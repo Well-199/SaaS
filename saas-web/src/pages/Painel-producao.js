@@ -8,9 +8,13 @@ import add from '../images/add.png'
 import url from '../services/api'
 import edit from '../images/edit.png'
 import del from '../images/delete.png'
+import som from '../audios/som.mp3'
 import moment from 'moment'
-
+import { io } from 'socket.io-client'
 import '../styles/painel-producao.css'
+
+const ENDPOINT = "http://ec2-54-175-3-119.compute-1.amazonaws.com:8000";
+const socket = io(ENDPOINT);
 
 const PainelProducao = () => {
 
@@ -34,6 +38,9 @@ const PainelProducao = () => {
     const [observacoes, setObservacoes] = useState('')
     const [roteiro, setRoteiro] = useState('')
     const [dataEntrega, setDataEntrega] = useState('')
+
+    const [audio] = useState(new Audio(som))
+    const [playing, setPlaying] = useState(false)
 
     // Puxa os dados do pedidos (Colocar filtro de data)
     async function listAll () {
@@ -237,6 +244,13 @@ const PainelProducao = () => {
 
     useEffect(() => {
         listAll()
+
+        socket.on('pedido', (pedido) => {
+           if(pedido.data==true){
+                window.location.reload()
+           }
+        })
+        
     }, [])
 
     return(
