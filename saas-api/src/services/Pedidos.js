@@ -40,6 +40,15 @@ const Pedidos = {
         return rows
     },
 
+    // busca por data e motorista
+    filterDateRoute: async (table, roteiro, startDate, endDate) => {
+        const { rows } = await db.query(`
+            SELECT * FROM pedidos WHERE(roteiro ilike'%${roteiro}%' AND ${table} >=$1 AND ${table} <=$2) ORDER BY pedidos.data_receb ASC`, 
+            [startDate, endDate]
+        )
+        return rows
+    },
+
     // Busca um unico pedido
     find: async (id) => {
         const { rows } = await db.query(`
@@ -73,7 +82,14 @@ const Pedidos = {
         const { rows } = await db.query(`
             UPDATE pedidos SET conf_nfe=$1 WHERE(id=$2)`, [value, id])
         return rows
-    }
+    },
+
+    // exclui um pedido pelo id da linha
+    del: async (id) => {
+        const { rows } = await db.query(`
+            DELETE FROM pedidos WHERE(id=$1)`, [id])
+        return rows
+    },
 
 }
 

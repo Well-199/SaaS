@@ -7,6 +7,7 @@ import Header from '../components/Header'
 import add from '../images/add.png'
 import url from '../services/api'
 import edit from '../images/edit.png'
+import del from '../images/delete.png'
 import moment from 'moment'
 
 import '../styles/painel-producao.css'
@@ -92,7 +93,7 @@ const PainelProducao = () => {
 
     }
 
-    // filtra por data e tipo de data
+    // filtra por data e tipo de data e motorista
     async function filterDate () {
 
         const req = await fetch(`${url}/dateFilter`, {
@@ -100,7 +101,8 @@ const PainelProducao = () => {
             body: JSON.stringify({
                 optionFilter: optionFilter,
                 startDate: startDate,
-                endDate: endDate
+                endDate: endDate,
+                roteiro: roteiro
             }),
             headers: {
                 'Content-Type': 'application/json',
@@ -138,6 +140,34 @@ const PainelProducao = () => {
 
         alert('ERRO AO ALTERAR CONF NFE')
         window.location.reload()
+    }
+
+    // exclui uma linha
+    async function deleteLine(id){
+
+        let confirm = window.confirm('Deseja realmente excluir esse pedido?')
+
+        if(confirm){
+            const req = await fetch(`${url}/delete`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    id: id
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem('systemToken')
+                }
+            })
+            const res = await req.json()
+
+            if(res.data==true){
+                window.location.reload()
+                return
+            }
+    
+            alert('ERRO AO EXCLUIR')
+        }
+
     }
 
     // Formatação de moeda pt-br
@@ -321,6 +351,13 @@ const PainelProducao = () => {
                     onChange={(e) => setEndDate(e.target.value)}
                 />
 
+                <input type="text" 
+                    className='filterInputs'
+                    value={roteiro}
+                    placeholder="Motorista (opcional)"
+                    onChange={(e) => setRoteiro(e.target.value.toUpperCase())}
+                />
+
                 <button className='filterInputs' onClick={filterDate}>BUSCAR</button>
             </div>
 
@@ -344,6 +381,7 @@ const PainelProducao = () => {
                     <th style={{'background':'#af78d6'}}>Data Entrega</th>
                     <th style={{'background':'#af78d6'}}>Conf Nfe</th>
                     <th style={{'background':'#a5a5a5'}}>Editar</th>
+                    <th style={{'background':'#a5a5a5'}}>Excluir</th>
                 </tr>
                 {pedidos.map(item => 
                 <tr key={item.id} style={colorChange(item)}>
@@ -379,6 +417,13 @@ const PainelProducao = () => {
                         <Link to={`/Editar/${item.id}`}>
                             <img className='inputEdit' src={edit} alt="editar"/>
                         </Link>
+                    </td>
+                    <td>
+                        <img 
+                            className='inputEdit' 
+                            src={del} alt="excluir"
+                            onClick={() => deleteLine(item.id)}
+                        />
                     </td>
                 </tr>
                 )}

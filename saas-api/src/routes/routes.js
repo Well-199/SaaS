@@ -22,4 +22,6 @@ router.post('/edit', Auth.private, PedidosController.edit)
 
 router.post('/isConfNfe', Auth.private, PedidosController.isConfNfe)
 
+router.post('/delete', Auth.private, PedidosController.deleteItem)
+
 module.exports = router
