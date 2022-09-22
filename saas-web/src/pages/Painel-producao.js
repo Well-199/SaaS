@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal';
-import { modalStyles } from '../styles/modal'
+import { modalStyles, modalStylesMobile } from '../styles/modal'
 import IntlCurrencyInput from "react-intl-currency-input"
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
@@ -8,13 +8,15 @@ import add from '../images/add.png'
 import url from '../services/api'
 import edit from '../images/edit.png'
 import del from '../images/delete.png'
+import menu from '../images/menu.png'
 import som from '../audios/som.mp3'
 import moment from 'moment'
 import { io } from 'socket.io-client'
 import '../styles/painel-producao.css'
+import '../styles/loader.css'
 
-const ENDPOINT = "http://ec2-54-175-3-119.compute-1.amazonaws.com:8000";
-const socket = io(ENDPOINT);
+const ENDPOINT = "http://ec2-54-175-3-119.compute-1.amazonaws.com:8000"
+const socket = io(ENDPOINT)
 
 const PainelProducao = () => {
 
@@ -47,7 +49,12 @@ const PainelProducao = () => {
 
         const req = await fetch(`${url}/listAll`, {
             method: 'POST',
-            body: JSON.stringify(),
+            body: JSON.stringify({
+                optionFilter: optionFilter,
+                startDate: startDate,
+                endDate: endDate,
+                roteiro: roteiro
+            }),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('systemToken')
@@ -88,9 +95,9 @@ const PainelProducao = () => {
         const res = await req.json()
 
         if(res.data==true){
+            
             alert(`${res.msg}`)
             window.location.reload()
-
             return
         }
 
@@ -122,6 +129,10 @@ const PainelProducao = () => {
             setPedidos(res.result)
         }
 
+        if(window.innerWidth <= 980){
+            menuMobile()
+        }
+
     }
 
     // Alterar o valor do chebox
@@ -141,12 +152,12 @@ const PainelProducao = () => {
         const res = await req.json()
 
         if(res.data==true){
-            window.location.reload()
+            listAll()
             return
         }
 
         alert('ERRO AO ALTERAR CONF NFE')
-        window.location.reload()
+        listAll()
     }
 
     // exclui uma linha
@@ -168,7 +179,7 @@ const PainelProducao = () => {
             const res = await req.json()
 
             if(res.data==true){
-                window.location.reload()
+                listAll()
                 return
             }
     
@@ -221,7 +232,7 @@ const PainelProducao = () => {
     // fecha o modal e limpa os states
     function closeModal() {
         setIsOpen(false)
-        window.location.reload()
+        listAll()
     }
 
     // abre o modal para receber os dados e criar uma nova linha
@@ -242,13 +253,28 @@ const PainelProducao = () => {
         }
     }
 
+    function menuMobile (){
+
+        const menu = document.querySelector('.filters')
+
+        if(window.innerWidth <= 980 && menu.style.display=='' || menu.style.display=='none'){
+            menu.style.display = 'flex'
+            return
+        }
+
+        if(window.innerWidth <= 980 && menu.style.display=='flex'){
+            menu.style.display = 'none'
+            return
+        }
+    }
+
     useEffect(() => {
         listAll()
 
         socket.on('pedido', (pedido) => {
-           if(pedido.data==true){
+            if(pedido.data==true){
                 window.location.reload()
-           }
+            }
         })
         
     }, [])
@@ -260,7 +286,7 @@ const PainelProducao = () => {
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
-                style={modalStyles}
+                style={window.innerWidth > 980 ? modalStyles : modalStylesMobile}
                 contentLabel="Example Modal"
             >
                 <div className='modalContainer'>
@@ -346,6 +372,8 @@ const PainelProducao = () => {
 
             </Modal>
 
+            <img className='menuMobile' src={menu} alt="Menu" onClick={menuMobile}/>
+
             <div className='filters'>
                 <select className='filterInputs' value={optionFilter}
                     onChange={(e) => setOptionFilter(e.target.value)}>
@@ -374,65 +402,69 @@ const PainelProducao = () => {
 
                 <button className='filterInputs' onClick={filterDate}>BUSCAR</button>
             </div>
-
+            
+            {pedidos.length ? 
             <table id='main-table'>
                 <tr>
-                    <th style={{'background':'#95b3d7'}}>Data Receb.</th>
-                    <th style={{'background':'#95b3d7'}}>Hora Receb.</th>
-                    <th style={{'background':'#95b3d7'}}>Nome Cliente</th>
-                    <th style={{'background':'#00b04f'}}>Vale</th>
-                    <th style={{'background':'#af78d6'}}>Nota Fiscal</th>
-                    <th style={{'background':'#00b04f'}}>Nº Pedido Cliente</th>
-                    <th style={{'background':'#af78d6'}}>QTD Volumes</th>
-                    <th style={{'background':'#af78d6'}}>Peso</th>
-                    <th style={{'background':'#a5a5a5'}}>Uni Med</th>
-                    <th style={{'background':'#00b04f'}}>Valor Pedido</th>
-                    <th style={{'background':'#00b04f'}}>Tipo Faturamento</th>
-                    <th style={{'background':'#af78d6'}}>Separado Por</th>
-                    <th style={{'background':'#af78d6'}}>Data Separação</th>
-                    <th style={{'background':'#a5a5a5'}}>Observaçoes</th>
-                    <th style={{'background':'#af78d6'}}>Roteiro</th>
-                    <th style={{'background':'#af78d6'}}>Data Entrega</th>
-                    <th style={{'background':'#af78d6'}}>Conf Nfe</th>
-                    <th style={{'background':'#a5a5a5'}}>Editar</th>
-                    <th style={{'background':'#a5a5a5'}}>Excluir</th>
+                    <th style={{'background':'#95b3d7'}} className="desktop">Data Receb.</th>
+                    <th style={{'background':'#95b3d7'}} className="desktop">Hora Receb.</th>
+                    <th style={{'background':'#95b3d7'}} className="mobile" id='mobile2'>Nome Cliente</th>
+                    <th style={{'background':'#00b04f'}} className="desktop">Vale</th>
+                    <th style={{'background':'#af78d6'}} className="desktop">Nota Fiscal</th>
+                    <th style={{'background':'#00b04f'}} className="desktop">Nº Pedido Cliente</th>
+                    <th style={{'background':'#af78d6'}} className="desktop">QTD Volumes</th>
+                    <th style={{'background':'#af78d6'}} className="desktop">Peso</th>
+                    <th style={{'background':'#a5a5a5'}} className="desktop">Uni Med</th>
+                    <th style={{'background':'#00b04f'}} className="desktop">Valor Pedido</th>
+                    <th style={{'background':'#00b04f'}} className="desktop">Tipo Faturamento</th>
+                    <th style={{'background':'#af78d6'}} className="desktop">Separado Por</th>
+                    <th style={{'background':'#af78d6'}} className="desktop">Data Separação</th>
+                    <th style={{'background':'#a5a5a5'}} className="desktop">Observaçoes</th>
+                    <th style={{'background':'#af78d6'}} className="desktop">Roteiro</th>
+                    <th style={{'background':'#af78d6'}} className="mobile">Data Entrega</th>
+                    <th style={{'background':'#af78d6'}} className="mobile">Conf Nfe</th>
+                    <th style={{'background':'#a5a5a5'}} className="mobile">Editar</th>
+                    <th style={{'background':'#a5a5a5'}} className="mobile">Excluir</th>
                 </tr>
                 {pedidos.map(item => 
                 <tr key={item.id} style={colorChange(item)}>
-                    <td>{moment(item.data_receb).format('DD/MM/YYYY')}</td>
-                    <td>{item.hora_receb}</td>
-                    <td>{item.cliente}</td>
-                    <td>{item.vale}</td>
-                    <td>{item.nota_fiscal}</td>
-                    <td>{item.numero_pedido}</td>
-                    <td>{item.qtd_volumes}</td>
-                    <td>{item.peso}</td>
-                    <td>{item.uni_med}</td>
-                    <td>
+                    <td className="desktop">{moment(item.data_receb).format('DD/MM/YYYY')}</td>
+                    <td className="desktop">{item.hora_receb}</td>
+                    <td className="mobile" id='mobile2'>{item.cliente}</td>
+                    <td className="desktop">{item.vale}</td>
+                    <td className="desktop">{item.nota_fiscal}</td>
+                    <td className="desktop">{item.numero_pedido}</td>
+                    <td className="desktop">{item.qtd_volumes}</td>
+                    <td className="desktop">{item.peso}</td>
+                    <td className="desktop">{item.uni_med}</td>
+                    <td className="desktop">
                         {Number(item.valor_pedido).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
                     </td>
-                    <td>{item.tipo_faturamento}</td>
-                    <td>{item.separado_por}</td>
-                    <td>
+                    <td className="desktop">{item.tipo_faturamento}</td>
+                    <td className="desktop">{item.separado_por}</td>
+                    <td className="desktop">
                         {item.separado_data=='' ? '' : moment(item.separado_data).format('DD/MM/YYYY')}
                     </td>
-                    <td style={item.observacoes!=='' ? {'background':'#FDA7DF'} : colorChange(item)}>{item.observacoes}</td>
-                    <td>{item.roteiro}</td>
+                    <td 
+                        className="desktop"
+                        style={item.observacoes!=='' ? {'background':'#FDA7DF'} : colorChange(item)}>{item.observacoes}
+                    </td>
+                    <td className="desktop">{item.roteiro}</td>
                     <td>
                         {item.data_entrega=='' ? '' : moment(item.data_entrega).format('DD/MM/YYYY')}
                     </td>
-                    <td>
+                    <td className="mobile">
                         <input type="checkbox" 
                             checked={item.conf_nfe}
                             onChange={(e) => isNfeConf(item.id, e.target.checked)}
                         />
                     </td>
-                    <td>
+                    <td className="mobile">
                         <Link to={`/Editar/${item.id}`}>
                             <img className='inputEdit' src={edit} alt="editar"/>
                         </Link>
                     </td>
-                    <td>
+                    <td className="mobile">
                         <img 
                             className='inputEdit' 
                             src={del} alt="excluir"
@@ -442,7 +474,9 @@ const PainelProducao = () => {
                 </tr>
                 )}
             </table>
-
+            :
+            <div class="loader"></div>
+            }
             <div className='add' onClick={openModalList}>
                 <img src={add} alt="add"/>
             </div>

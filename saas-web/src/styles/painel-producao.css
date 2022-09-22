@@ -7,6 +7,10 @@
     font-family: 'Outfit', sans-serif;
 }
 
+.menuMobile{
+    display: none;
+}
+
 /* Start Modal  */
 .modalContainer{
     width: 500px;
@@ -20,7 +24,7 @@
 .modalContainer input{
     width: 100%;
     height: 40px;
-    text-align: right;
+    text-align: left;
     padding-right: 5px;
     margin-bottom: 20px;
 }
@@ -56,6 +60,7 @@
     padding-bottom: 15px;
     margin-left: auto;
     margin-right: auto;
+    background-color: #FFFFFF;
 }
 
 .filters select, input, button{
@@ -124,4 +129,70 @@
     width: 100%;
     background: #3f4646;
     border-radius: 50px;
+}
+
+@media only screen and (max-width: 980px){
+
+    .menuMobile{
+        width: 40px;
+        display: flex;
+        margin-left: 10px;
+        cursor: pointer;
+        margin-top: -50px;
+        background-color: #3f4646;
+        padding-bottom: 10px;
+    }
+
+    .desktop{
+        display: none;
+    }
+
+    #mobile2{
+        width: 90px;
+        max-width: 90px;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
+    .filters{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #3f4646;
+        display: none;
+    }
+
+    .filters select, input, button{
+        width: 250px;
+        height: 40px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .add{
+        width: 60px;
+        bottom: 20px;
+        right: 20px;
+        cursor: pointer;
+    }
+
+    .modalContainer{
+        width: 100%;
+        padding-top: 120px;
+        height: auto;
+    }
+
+    .modalContainer input{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .modalContainer label{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 }

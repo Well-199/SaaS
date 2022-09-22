@@ -42,14 +42,15 @@ connection.connect((error, client) => {
 
                 // msg payload recebe os dados do novo pedido adcionado no banco
                 let data = msg.payload
+                console.log(data)
 
-                // excuta metodo que avisa o front do novo pedido
-                if(data){
+                // Se tem pedido fax a conexão com o front e avisa com emit
+                if(data){ 
                     socket.emit("pedido", {data: true})
                 }
+
+                const query = client.query("LISTEN pedidos_new")
             })
-            const query = client.query("LISTEN pedidos_new")
-        
         })
         
     }

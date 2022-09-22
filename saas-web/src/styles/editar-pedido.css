@@ -18,7 +18,7 @@
 .editMain input{
     width: 100%;
     height: 40px;
-    text-align: right;
+    text-align: left;
     padding-right: 5px;
     margin-bottom: 15px;
 }
@@ -44,4 +44,34 @@
 
 .editButtons button{
     cursor: pointer;
+}
+
+@media only screen and (max-width: 980px){
+
+    .editMain{
+        width: 100%;
+    }
+
+    .editMain input{
+        width: 90%;
+        height: 40px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .editMain label{
+        width: 90%;
+        height: 40px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .editButtons{
+        width: 250px;
+        height: 50px;
+    }
+
+    .editButtons button{
+        width: 120px;
+    }
 }

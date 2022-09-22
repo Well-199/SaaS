@@ -103,3 +103,32 @@
     text-align: center;
 }
 
+@media only screen and (max-width: 980px){
+
+    .home-menu {
+        display: none;
+    }
+
+    .home-logo{
+        display: none;
+    }
+
+    .home-welcome{
+        display: none;
+    }
+
+    .home-header{
+        height: 60px;
+        min-height: 60px;
+    }
+
+    .sair{
+        margin-top: 10px;
+        margin-right: 10px;
+        position: absolute;
+        right: 0;
+        filter: invert(0);
+    }
+
+}
+

@@ -3,9 +3,9 @@ const db = require('../config/connection')
 const Pedidos = {
 
     // Traz todos os pedidos por data
-    findAll: async (startDate, endDate) => {
+    findAll: async (table, startDate, endDate) => {
         const { rows } = await db.query(`
-            SELECT * FROM pedidos WHERE(data_entrega >=$1 AND data_entrega <=$2) ORDER BY pedidos.data_receb ASC`,
+            SELECT * FROM pedidos WHERE(${table} >=$1 AND ${table} <=$2) ORDER BY pedidos.data_receb ASC`,
             [startDate, endDate])
         return rows
     },

@@ -7,10 +7,19 @@ const PedidosController = {
 
     async listAll (req, res) {
 
-        let startDate = moment().add(1, 'day').format('YYYY-MM-DD 00:00:00')
-        let endDate = moment().add(1, 'day').format('YYYY-MM-DD 23:59:59')
+        let table = req.body.optionFilter
+        let startDate = moment(req.body.startDate).format('YYYY-MM-DD 00:00:00')
+        let endDate = moment(req.body.endDate).format('YYYY-MM-DD 23:59:59')
+        let roteiro = req.body.roteiro
 
-        const pedidos = await Pedidos.findAll(startDate, endDate)
+        let pedidos = ''
+
+        if(roteiro==''){
+            pedidos = await Pedidos.findAll(table, startDate, endDate)
+        }
+        else{
+            pedidos = await Pedidos.filterDateRoute(table, roteiro, startDate, endDate)
+        }
 
         let json = []
 
