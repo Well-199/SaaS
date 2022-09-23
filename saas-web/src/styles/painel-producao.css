@@ -154,6 +154,13 @@
         text-overflow:ellipsis;
     }
 
+    #mobile3{
+        width: 90px;
+        max-width: 90px;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
     .filters{
         width: 100%;
         flex-direction: column;

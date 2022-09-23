@@ -243,13 +243,13 @@ const PainelProducao = () => {
     function colorChange(item){
 
         if(item.vale==''){
-            return {'background':'#e67e22'}
+            return {'background':'rgb(253, 203, 110)'}
         }
         else if(item.vale!=='' && item.separado_por==''){
-            return {'background':'#e74c3c'}
+            return {'background':'#fe6160'}
         }
         else if(item.separado_por!==''){
-            return {'background':'#2ecc71'}  
+            return {'background':'rgb(123, 237, 159)'}  
         }
     }
 
@@ -272,6 +272,7 @@ const PainelProducao = () => {
         listAll()
 
         socket.on('pedido', (pedido) => {
+            
             if(pedido.data==true){
                 window.location.reload()
             }
@@ -406,32 +407,32 @@ const PainelProducao = () => {
             {pedidos.length ? 
             <table id='main-table'>
                 <tr>
-                    <th style={{'background':'#95b3d7'}} className="desktop">Data Receb.</th>
-                    <th style={{'background':'#95b3d7'}} className="desktop">Hora Receb.</th>
-                    <th style={{'background':'#95b3d7'}} className="mobile" id='mobile2'>Nome Cliente</th>
-                    <th style={{'background':'#00b04f'}} className="desktop">Vale</th>
-                    <th style={{'background':'#af78d6'}} className="desktop">Nota Fiscal</th>
-                    <th style={{'background':'#00b04f'}} className="desktop">Nº Pedido Cliente</th>
-                    <th style={{'background':'#af78d6'}} className="desktop">QTD Volumes</th>
-                    <th style={{'background':'#af78d6'}} className="desktop">Peso</th>
-                    <th style={{'background':'#a5a5a5'}} className="desktop">Uni Med</th>
-                    <th style={{'background':'#00b04f'}} className="desktop">Valor Pedido</th>
-                    <th style={{'background':'#00b04f'}} className="desktop">Tipo Faturamento</th>
-                    <th style={{'background':'#af78d6'}} className="desktop">Separado Por</th>
-                    <th style={{'background':'#af78d6'}} className="desktop">Data Separação</th>
-                    <th style={{'background':'#a5a5a5'}} className="desktop">Observaçoes</th>
-                    <th style={{'background':'#af78d6'}} className="desktop">Roteiro</th>
-                    <th style={{'background':'#af78d6'}} className="mobile">Data Entrega</th>
-                    <th style={{'background':'#af78d6'}} className="mobile">Conf Nfe</th>
-                    <th style={{'background':'#a5a5a5'}} className="mobile">Editar</th>
-                    <th style={{'background':'#a5a5a5'}} className="mobile">Excluir</th>
+                    <th style={{'background':'#FFFFFF'}} className="desktop">Data Receb.</th>
+                    <th style={{'background':'#FFFFFF'}} className="desktop">Hora Receb.</th>
+                    <th style={{'background':'#FFFFFF'}} className="mobile" id='mobile2'>Nome Cliente</th>
+                    <th style={{'background':'#000000', 'color':'#FFFFFF'}} className="mobile">Vale</th>
+                    <th style={{'background':'rgb(0, 206, 201)', 'color':'#FFFFFF'}} className="desktop">Nota Fiscal</th>
+                    <th style={{'background':'#000000', 'color':'#FFFFFF'}} className="desktop">Nº Pedido Cliente</th>
+                    <th style={{'background':'rgb(0, 206, 201)', 'color':'#FFFFFF'}} className="desktop">QTD Volumes</th>
+                    <th style={{'background':'rgb(0, 206, 201)', 'color':'#FFFFFF'}} className="desktop">Peso</th>
+                    <th style={{'background':'rgb(96, 163, 188)', 'color':'#FFFFFF'}} className="desktop">Uni Med</th>
+                    <th style={{'background':'#000000', 'color':'#FFFFFF'}} className="desktop">Valor Pedido</th>
+                    <th style={{'background':'#000000', 'color':'#FFFFFF'}} className="mobile">Tipo Faturamento</th>
+                    <th style={{'background':'rgb(0, 206, 201)', 'color':'#FFFFFF'}} className="desktop">Separado Por</th>
+                    <th style={{'background':'rgb(0, 206, 201)', 'color':'#FFFFFF'}} className="desktop">Data Separação</th>
+                    <th style={{'background':'rgb(96, 163, 188)', 'color':'#FFFFFF'}} className="desktop">Observaçoes</th>
+                    <th style={{'background':'rgb(0, 206, 201)', 'color':'#FFFFFF'}} className="desktop">Roteiro</th>
+                    <th style={{'background':'rgb(0, 206, 201)', 'color':'#FFFFFF'}} className="desktop">Data Entrega</th>
+                    <th style={{'background':'rgb(0, 206, 201)', 'color':'#FFFFFF'}} className="mobile">Conf Nfe</th>
+                    <th style={{'background':'#a5a5a5', 'color':'#FFFFFF'}} className="desktop">Editar</th>
+                    <th style={{'background':'#a5a5a5', 'color':'#FFFFFF'}} className="desktop">Excluir</th>
                 </tr>
                 {pedidos.map(item => 
                 <tr key={item.id} style={colorChange(item)}>
                     <td className="desktop">{moment(item.data_receb).format('DD/MM/YYYY')}</td>
                     <td className="desktop">{item.hora_receb}</td>
                     <td className="mobile" id='mobile2'>{item.cliente}</td>
-                    <td className="desktop">{item.vale}</td>
+                    <td className="mobile">{item.vale}</td>
                     <td className="desktop">{item.nota_fiscal}</td>
                     <td className="desktop">{item.numero_pedido}</td>
                     <td className="desktop">{item.qtd_volumes}</td>
@@ -440,17 +441,17 @@ const PainelProducao = () => {
                     <td className="desktop">
                         {Number(item.valor_pedido).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
                     </td>
-                    <td className="desktop">{item.tipo_faturamento}</td>
+                    <td className="mobile" id='mobile3'>{item.tipo_faturamento}</td>
                     <td className="desktop">{item.separado_por}</td>
                     <td className="desktop">
                         {item.separado_data=='' ? '' : moment(item.separado_data).format('DD/MM/YYYY')}
                     </td>
                     <td 
                         className="desktop"
-                        style={item.observacoes!=='' ? {'background':'#FDA7DF'} : colorChange(item)}>{item.observacoes}
+                        style={item.observacoes!=='' ? {'background':'rgb(253, 121, 168)'} : colorChange(item)}>{item.observacoes}
                     </td>
                     <td className="desktop">{item.roteiro}</td>
-                    <td>
+                    <td className="desktop">
                         {item.data_entrega=='' ? '' : moment(item.data_entrega).format('DD/MM/YYYY')}
                     </td>
                     <td className="mobile">
@@ -459,12 +460,12 @@ const PainelProducao = () => {
                             onChange={(e) => isNfeConf(item.id, e.target.checked)}
                         />
                     </td>
-                    <td className="mobile">
+                    <td className="desktop">
                         <Link to={`/Editar/${item.id}`}>
                             <img className='inputEdit' src={edit} alt="editar"/>
                         </Link>
                     </td>
-                    <td className="mobile">
+                    <td className="desktop">
                         <img 
                             className='inputEdit' 
                             src={del} alt="excluir"
