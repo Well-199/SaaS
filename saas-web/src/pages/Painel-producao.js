@@ -15,8 +15,7 @@ import { io } from 'socket.io-client'
 import '../styles/painel-producao.css'
 import '../styles/loader.css'
 
-const ENDPOINT = "http://ec2-54-175-3-119.compute-1.amazonaws.com:8000"
-const socket = io(ENDPOINT)
+// const socket = io('http://ec2-54-175-3-119.compute-1.amazonaws.com:8000')
 
 const PainelProducao = () => {
 
@@ -271,12 +270,12 @@ const PainelProducao = () => {
     useEffect(() => {
         listAll()
 
-        socket.on('pedido', (pedido) => {
+        // socket.on('pedido', (pedido) => {
             
-            if(pedido.data==true){
-                window.location.reload()
-            }
-        })
+        //     if(pedido.data==true){
+        //         window.location.reload()
+        //     }
+        // })
         
     }, [])
 

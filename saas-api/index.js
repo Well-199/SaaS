@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
-    res.json({service: 'on'})
+    res.json({ server: true })
 })
 
 app.use('/api', routes)
@@ -30,29 +30,28 @@ server.listen(process.env.PORT, () => {
     console.log(`Server running on PORT ${process.env.PORT}`)
 })
 
-connection.connect((error, client) => {
+connection.connect((error, client, done) => {
     if(error){
         console.log(`Error in connecting database ${error}`)
     } else {
         console.log(`Database ${process.env.DB_NAME} successfully connected`)
 
-        io.on('connection', (socket) => {
+        // io.on('connection', (socket) => {
 
-            client.on('notification', (msg) => {
+        //     client.on('notification', (msg) => {
 
-                // msg payload recebe os dados do novo pedido adcionado no banco
-                let data = msg.payload
-                console.log(data)
+        //         // msg payload recebe os dados do novo pedido adcionado no banco
+        //         if(msg.payload){
+        //             socket.emit("pedido", {data: true})
+        //         }
+    
+        //     })
+            
+        //     console.log('connection detect')
+        //      // Listen for NOTIFY calls
+        //     const query = client.query("LISTEN pedidos_new")
+        // })
 
-                // Se tem pedido fax a conexão com o front e avisa com emit
-                if(data){ 
-                    socket.emit("pedido", {data: true})
-                }
-
-                const query = client.query("LISTEN pedidos_new")
-            })
-        })
-        
     }
 })
 

@@ -60,8 +60,8 @@ const Header = () => {
 
             <div className='home-menu'>
                 <ul>
-                    <li>
-                        {/* <select value={selectValue} 
+                    {/* <li>
+                        <select value={selectValue} 
                             className='select-cadastro' onChange={(e) => cadOptions(e.target.value)}
                         >
                             <option value="Cadastro">Cadastro</option>
@@ -69,11 +69,12 @@ const Header = () => {
                             <option value="Produtos">Produtos</option>
                             <option value="Colaborador">Colaborador</option>
                             <option value="Transportadora">Transportadora</option>
-                        </select> */}
-                    </li>
+                        </select>
+                    </li> */}
                     <li><img className='block' src={cadeado} />Gestão</li>
                     <li><img className='block' src={cadeado} />Financeiro</li>
                     <li><img className='block' src={cadeado} />Compras</li>
+                    <li><img className='block' src={check} />Cadastros</li>
                     <li><img className='payment' src={check} /><Link to="/Painel" className='link'>Vendas</Link></li>
                 </ul>
             </div>
