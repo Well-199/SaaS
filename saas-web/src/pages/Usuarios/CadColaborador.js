@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../../styles/cadastro.css'
 import Header from '../../components/Header'
 
-const Colaborador = () => {
+const CadastroColaborador = () => {
 
     return(
         <div>
@@ -19,4 +19,4 @@ const Colaborador = () => {
     )
 }
 
-export default Colaborador
+export default CadastroColaborador
