@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import Header from '../components/Header'
-import url from '../services/api'
+import Header from '../../components/Header'
+import url from '../../services/api'
 import { useNavigate } from 'react-router-dom'
 import IntlCurrencyInput from "react-intl-currency-input"
-import '../styles/editar-pedido.css'
+import '../../styles/editar-pedido.css'
 
 const EditarPedido = () => {
 

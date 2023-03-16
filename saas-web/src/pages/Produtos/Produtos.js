@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import '../styles/cadastro.css'
-import Header from '../components/Header'
+import '../../styles/cadastro.css'
+import Header from '../../components/Header'
 
-const Clientes = () => {
+const Produtos = () => {
 
     return(
         <div>
@@ -10,7 +10,7 @@ const Clientes = () => {
             
             <div className='cadastro-container'>
                 <div className='cadastro-title'>
-                    <h1>Cadastro de Clientes</h1>
+                    <h1>Cadastro de Produtos</h1>
                 </div>
 
             </div>
@@ -19,4 +19,4 @@ const Clientes = () => {
     )
 }
 
-export default Clientes
+export default Produtos

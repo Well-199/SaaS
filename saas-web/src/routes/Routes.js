@@ -1,15 +1,15 @@
 import { Routes, Route } from 'react-router-dom'
 import AuthPrivate from '../middlewares/Auth'
 
-import Login from '../pages/Login'
-import Home from '../pages/Home'
-import Clientes from '../pages/Clientes'
-import Produtos from '../pages/Produtos'
-import Colaborador from '../pages/Colaborador'
-import Transportadora from '../pages/Transportadora'
-import PainelProducao from '../pages/Painel-producao'
-import EditarPedido from '../pages/Editar-pedido'
-import AdicionarPedido from '../pages/Adicionar-pedido'
+import Login from '../pages/Login/Login'
+import Home from '../pages/Home/Home'
+import Clientes from '../pages/Usuarios/Clientes'
+import Produtos from '../pages/Produtos/Produtos'
+import Colaborador from '../pages/Usuarios/Colaborador'
+import Transportadora from '../pages/Transportes/Transportadora'
+import PainelProducao from '../pages/Home/Painel-producao'
+import EditarPedido from '../pages/Pedidos/Editar'
+import AdicionarPedido from '../pages/Pedidos/Adicionar'
 
 const Router = () => {
 

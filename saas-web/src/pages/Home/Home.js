@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import '../styles/home.css'
-import Header from '../components/Header'
+import '../../styles/home.css'
+import Header from '../../components/Header'
 
 const Home = () => {
 

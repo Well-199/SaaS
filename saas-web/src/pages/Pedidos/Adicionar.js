@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import IntlCurrencyInput from "react-intl-currency-input"
 import { useSelector } from 'react-redux'
-import Header from '../components/Header'
-import url from '../services/api'
-import '../styles/adicionar-pedido.css'
+import Header from '../../components/Header'
+import url from '../../services/api'
+import '../../styles/adicionar-pedido.css'
 
 const AdicionarPedido = () => {
 

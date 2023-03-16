@@ -1,10 +1,10 @@
 import React, { useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { setName, setCompany, setCompanyId, setToken } from '../redux/reducers/userReducer'
-import logoInput from '../images/input-output.png'
-import url from '../services/api'
-import '../styles/login.css'
+import { setName, setCompany, setCompanyId, setToken } from '../../redux/reducers/userReducer'
+import logoInput from '../../images/input-output.png'
+import url from '../../services/api'
+import '../../styles/login.css'
 
 const Login = () => {
 

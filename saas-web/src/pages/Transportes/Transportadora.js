@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import '../styles/cadastro.css'
-import Header from '../components/Header'
+import Header from '../../components/Header'
 
-const Colaborador = () => {
+const Transportadora = () => {
 
     return(
         <div>
             <Header/>
-
+            
             <div className='cadastro-container'>
                 <div className='cadastro-title'>
-                    <h1>Cadastro de Colaborador</h1>
+                    <h1>Cadastro de Transportadora</h1>
                 </div>
 
             </div>
-            
+
         </div>
     )
 }
 
-export default Colaborador
+export default Transportadora
