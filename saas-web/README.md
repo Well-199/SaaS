@@ -1,1 +1,1 @@
-#### Rota privada 10:00
+#### Pegando informação do Reducer no Redux
