@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { setName, setCompany, setToken } from '../redux/reducers/userReducer'
+import { setName, setCompany, setCompanyId, setToken } from '../redux/reducers/userReducer'
 import logoInput from '../images/input-output.png'
 import url from '../services/api'
 import '../styles/login.css'
@@ -32,6 +32,7 @@ const Login = () => {
         if(res.data===true){
             dispatch( setName(res.nome) )
             dispatch( setCompany(res.empresa) )
+            dispatch( setCompanyId(res.empresa_id) )
             dispatch( setToken(res.token) )
             navigate('/painel')
             return
@@ -47,6 +48,7 @@ const Login = () => {
     useEffect(() => {
         dispatch( setName('') )
         dispatch( setCompany('') )
+        dispatch( setCompanyId(0) )
         dispatch( setToken(null) )
     }, [])
 

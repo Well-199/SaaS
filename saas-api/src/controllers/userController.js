@@ -34,7 +34,7 @@ const UserController = {
         // insere um token na sessão
         await User.pushToken(token, user.id)
 
-        res.json({data: true, nome: user.nome, empresa: user.empresa, token: token})
+        res.json({data: true, nome: user.nome, empresa: user.empresa, empresa_id: user.empresa_id, token: token})
     },
 
     async userData (req, res) {

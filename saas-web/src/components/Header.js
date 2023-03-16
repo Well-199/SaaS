@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { setName, setCompany, setToken } from '../redux/reducers/userReducer'
+import { setName, setCompany, setCompanyId, setToken } from '../redux/reducers/userReducer'
 import '../styles/header.css'
 import cadeado from '../images/cadeado.png'
 import check from '../images/accept.png'
@@ -18,6 +18,7 @@ const Header = () => {
     async function logout () {
         dispatch( setName('') )
         dispatch( setCompany('') )
+        dispatch( setCompanyId(0) )
         dispatch( setToken(null) )
         navigate('/')
     }
