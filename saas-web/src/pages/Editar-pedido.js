@@ -96,7 +96,7 @@ const EditarPedido = () => {
         const res = await req.json()
 
         if(res.data==true){
-            navigate('/Painel')
+            navigate('/painel')
             return
         }
 
@@ -258,7 +258,7 @@ const EditarPedido = () => {
 
                 <div className='editButtons'>
                     <button onClick={edit}>SALVAR</button>
-                    <button onClick={() => navigate('/Painel')}>CANCELAR</button>
+                    <button onClick={() => navigate('/painel')}>CANCELAR</button>
                 </div>
             </div>
         </div>

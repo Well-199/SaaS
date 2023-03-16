@@ -33,7 +33,7 @@ const Login = () => {
             dispatch( setName(res.nome) )
             dispatch( setCompany(res.empresa) )
             dispatch( setToken(res.token) )
-            navigate('/Painel')
+            navigate('/painel')
             return
         }
         

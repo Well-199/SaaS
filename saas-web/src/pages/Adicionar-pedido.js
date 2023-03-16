@@ -53,7 +53,7 @@ const AdicionarPedido = () => {
         const res = await req.json()
 
         if(res.data==true){
-            navigate('/Painel')
+            navigate('/painel')
             return
         }
 
@@ -119,7 +119,7 @@ const AdicionarPedido = () => {
         setRoteiro('')
         setDataEntrega('')
 
-        navigate('/Painel')
+        navigate('/painel')
     }
 
     return(

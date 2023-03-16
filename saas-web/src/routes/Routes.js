@@ -16,14 +16,14 @@ const Router = () => {
     return(
         <Routes>
             <Route path='/' element={<Login/>}/>
-            <Route path='/Home' element={<AuthPrivate><Home/></AuthPrivate>}/>
-            <Route path='/Painel' element={<AuthPrivate><PainelProducao/></AuthPrivate>}/>
-            <Route path='/Adicionar' element={<AuthPrivate><AdicionarPedido/></AuthPrivate>}/>
-            <Route path='/Editar/:id' element={<AuthPrivate><EditarPedido/></AuthPrivate>}/>
-            <Route path='/Cadastro/Clientes' element={<AuthPrivate><Clientes/></AuthPrivate>}/>
-            <Route path='/Cadastro/Produtos' element={<AuthPrivate><Produtos/></AuthPrivate>}/>
-            <Route path='/Cadastro/Colaborador' element={<AuthPrivate><Colaborador/></AuthPrivate>}/>
-            <Route path='/Cadastro/Transportadora' element={<AuthPrivate><Transportadora/></AuthPrivate>}/>
+            <Route path='/home' element={<AuthPrivate><Home/></AuthPrivate>}/>
+            <Route path='/painel' element={<AuthPrivate><PainelProducao/></AuthPrivate>}/>
+            <Route path='/adicionar' element={<AuthPrivate><AdicionarPedido/></AuthPrivate>}/>
+            <Route path='/editar/:id' element={<AuthPrivate><EditarPedido/></AuthPrivate>}/>
+            <Route path='/cadastro/clientes' element={<AuthPrivate><Clientes/></AuthPrivate>}/>
+            <Route path='/cadastro/produtos' element={<AuthPrivate><Produtos/></AuthPrivate>}/>
+            <Route path='/cadastro/colaborador' element={<AuthPrivate><Colaborador/></AuthPrivate>}/>
+            <Route path='/cadastro/transportadora' element={<AuthPrivate><Transportadora/></AuthPrivate>}/>
         </Routes>
     )
 }

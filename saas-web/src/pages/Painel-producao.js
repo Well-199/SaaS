@@ -265,7 +265,7 @@ const PainelProducao = () => {
                         />
                     </td>
                     <td className="desktop">
-                        <Link to={`/Editar/${item.id}`}>
+                        <Link to={`/editar/${item.id}`}>
                             <img className='inputEdit' src={edit} alt="editar"/>
                         </Link>
                     </td>
@@ -283,7 +283,7 @@ const PainelProducao = () => {
             <div class="loader"></div>
             }
             <div className='add'>
-                <Link to="/Adicionar">
+                <Link to="/adicionar">
                     <img src={add} alt="add"/>
                 </Link>
             </div>

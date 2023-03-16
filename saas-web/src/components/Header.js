@@ -26,7 +26,7 @@ const Header = () => {
         <header className='home-header'>
 
             <div className='home-logo'>
-                <Link to="/Painel"><img src={logoInput} alt="logo"/></Link>
+                <Link to="/painel"><img src={logoInput} alt="logo"/></Link>
             </div>
 
             <div className='home-menu'>
@@ -35,7 +35,7 @@ const Header = () => {
                     <li><img className='block' src={cadeado} />Financeiro</li>
                     <li><img className='block' src={cadeado} />Compras</li>
                     <li><img className='block' src={check} />Cadastros</li>
-                    <li><img className='payment' src={check} /><Link to="/Painel" className='link'>Vendas</Link></li>
+                    <li><img className='payment' src={check} /><Link to="/painel" className='link'>Vendas</Link></li>
                 </ul>
             </div>
 
