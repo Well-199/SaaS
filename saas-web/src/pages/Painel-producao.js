@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import Modal from 'react-modal';
 import { modalStyles, modalStylesMobile } from '../styles/modal'
 import IntlCurrencyInput from "react-intl-currency-input"
@@ -18,6 +19,8 @@ import '../styles/loader.css'
 // const socket = io('http://ec2-54-175-3-119.compute-1.amazonaws.com:8000')
 
 const PainelProducao = () => {
+
+    const user = useSelector((state) => state.user)
 
     const [pedidos, setPedidos] = useState([])
     const [modalIsOpen, setIsOpen] = useState(false)
@@ -56,7 +59,7 @@ const PainelProducao = () => {
             }),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('systemToken')
+                'Authorization': user.token
             }
         })
         const res = await req.json()
@@ -88,7 +91,7 @@ const PainelProducao = () => {
             }),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('systemToken')
+                'Authorization': user.token
             }
         })
         const res = await req.json()
@@ -119,7 +122,7 @@ const PainelProducao = () => {
             }),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('systemToken')
+                'Authorization': user.token
             }
         })
         const res = await req.json()
@@ -145,7 +148,7 @@ const PainelProducao = () => {
             }),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('systemToken')
+                'Authorization': user.token
             }
         })
         const res = await req.json()
@@ -172,7 +175,7 @@ const PainelProducao = () => {
                 }),
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem('systemToken')
+                    'Authorization': user.token
                 }
             })
             const res = await req.json()

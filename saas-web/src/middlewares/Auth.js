@@ -1,11 +1,11 @@
 import { Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const AuthPrivate = ({children}) => {
 
-    // Buscar no local storage e compara hash com o banco
-    const isAuth = localStorage.getItem('systemToken')
+    const user = useSelector((state) => state.user)
 
-    if(isAuth==null){
+    if(user.token==null){
         return <Navigate to="/"/>
     }
     

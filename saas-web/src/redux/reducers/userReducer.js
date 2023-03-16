@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit"
 export const slice = createSlice({
     name: 'user',
     initialState: {
-        name: 'Wellington',
-        company: "WellSistemasWeb",
-        token: "mnc90823hf9dh329bf2f3br237gh7"
+        name: '',
+        company: '',
+        token: null
     },
     reducers: {
         setName: (state, action) => {

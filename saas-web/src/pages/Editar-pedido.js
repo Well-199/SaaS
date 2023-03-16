@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Header from '../components/Header'
 import url from '../services/api'
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +11,7 @@ const EditarPedido = () => {
 
     const params = useParams()
     const navigate = useNavigate()
+    const user = useSelector((state) => state.user)
 
     const [id, setId] = useState('')
     const [dataReceb, setDataReceb] = useState('')
@@ -38,7 +40,7 @@ const EditarPedido = () => {
             }),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('systemToken')
+                'Authorization': user.token
             }
         })
         const res = await req.json()
@@ -88,7 +90,7 @@ const EditarPedido = () => {
             }),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('systemToken')
+                'Authorization': user.token
             }
         })
         const res = await req.json()

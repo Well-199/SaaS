@@ -1,10 +1,14 @@
 import React, { useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setName, setCompany, setToken } from '../redux/reducers/userReducer'
 import logoInput from '../images/input-output.png'
 import url from '../services/api'
 import '../styles/login.css'
 
 const Login = () => {
+
+    const dispatch = useDispatch()
 
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
@@ -26,11 +30,11 @@ const Login = () => {
         const res = await req.json()
 
         if(res.data===true){
-            
-            localStorage.setItem('systemToken', res.token)
+            dispatch( setName(res.nome) )
+            dispatch( setCompany(res.empresa) )
+            dispatch( setToken(res.token) )
             navigate('/Painel')
             return
-
         }
         
         setError(res.data)
@@ -41,7 +45,9 @@ const Login = () => {
     }
 
     useEffect(() => {
-        localStorage.removeItem('systemToken')
+        dispatch( setName('') )
+        dispatch( setCompany('') )
+        dispatch( setToken(null) )
     }, [])
 
     return(
