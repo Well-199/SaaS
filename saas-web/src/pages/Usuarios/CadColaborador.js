@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import TelefoneBrasileiroInput from "react-telefone-brasileiro";
@@ -37,7 +37,6 @@ const CadastroColaborador = () => {
             }
         })
         const res = await req.json()
-        console.log(res)
         if(res.data===true){
             navigate('/painel')
         }
