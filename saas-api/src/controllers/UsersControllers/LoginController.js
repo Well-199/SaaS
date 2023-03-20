@@ -1,4 +1,4 @@
-const User = require('../services/User')
+const User = require('../../services/User')
 const bcrypt = require('bcrypt')
 
 const UserController = {

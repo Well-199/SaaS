@@ -3,10 +3,13 @@ const router = express.Router()
 
 const Auth = require('../middlewares/Auth')
 
-const UserController = require('../controllers/userController')
+const UserController = require('../controllers/UsersControllers/LoginController')
 const PedidosController = require('../controllers/pedidosController')
+const CadastroController = require('../controllers/UsersControllers/CadastroController')
 
 router.post('/login', UserController.login)
+
+router.post('/cadastro/novoColaborador', CadastroController.cadastroColaborador)
 
 router.get('/user', Auth.private, UserController.userData)
 
