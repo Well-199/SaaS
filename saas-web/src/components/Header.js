@@ -35,7 +35,7 @@ const Header = () => {
                     <li><img className='block' src={cadeado} />Gestão</li>
                     <li><img className='block' src={cadeado} />Financeiro</li>
                     <li><img className='block' src={cadeado} />Compras</li>
-                    <li><img className='block' src={check} />Cadastros</li>
+                    <li><img className='payment' src={check} /><Link to="/cadastro/colaborador" className='link'>Cadastros</Link></li>
                     <li><img className='payment' src={check} /><Link to="/painel" className='link'>Vendas</Link></li>
                 </ul>
             </div>
