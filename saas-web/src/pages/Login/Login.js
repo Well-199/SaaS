@@ -55,26 +55,29 @@ const Login = () => {
     return(
         <div className='login-container'>
 
-            <div className='login-main'>
-                
+            <div className='login-main'>               
+                <div className='login'>
+                    <form>
+                        <label>E-mail</label>
+                        <input type='email' value={email} 
+                            placeholder="Digite seu e-mail"
+                            onChange={(e) => setEmail(e.target.value.toLowerCase())}
+                        />
+                        
+                        <label>Senha</label>
+                        <input type='password' value={password}
+                            placeholder="Sua senha"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        <p id='error-login'>{error}</p>
+
+                        <button onClick={isVerify}>ENTRAR</button>
+                    </form>
+                </div>
+
                 <div className='logo'>
                     <img src={logoInput} alt="logo"/>
-                </div>
-                
-                <div className='login'>
-                    <input type='email' value={email} 
-                        placeholder=" Email"
-                        onChange={(e) => setEmail(e.target.value.toLowerCase())}
-                    />
-
-                    <input type='password' value={password}
-                        placeholder=" Password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-
-                    <p id='error-login'>{error}</p>
-
-                    <button onClick={isVerify}>LOGIN</button>
                 </div>
 
             </div>
